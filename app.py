@@ -1,6 +1,8 @@
 import falcon
-import lib.models.things as things
-import lib.models.users as users
+import lib.routes.things as things
+import lib.routes.users as users
+
+
 api = application = falcon.API()
 
 things = things.ThingsResource()
