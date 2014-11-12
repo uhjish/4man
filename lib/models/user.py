@@ -9,13 +9,21 @@ class User(BaseModel):
     first = pw.CharField(index=True)
     middle = pw.CharField()
     last = pw.CharField(index=True)
+    details = pw.CharField()
     created_at = pw.DateTimeField(default=datetime.datetime.now)
     is_active = pw.BooleanField()
 
+class UserNotes(BaseModel):
+    id = pw.PrimaryKeyField()
+    user_id = pw.ForeignKeyField(User, related_name="notes", index=True)
+    note = pw.CharField()
+    user_visible = pw.BooleanField(default=False)
+    contractor_visible = pw.BooleanField(default=False)
+    estimator_visible = pw.BooleanField(default=True)
+    created_at = pw.DateTimeField(default=datetime.datetime.now, index=True)
+
 class UserLogin(BaseModel):
-    user_id = pw.ForeignKeyField( User, 
-                                  related_name="login", 
-                                  primary_key=True )
+    user_id = pw.ForeignKeyField( User, related_name="login", primary_key=True )
     email_id = pw.CharField()
     password = pw.CharField()
     created_at = pw.DateTimeField(default=datetime.datetime.now)
@@ -31,6 +39,7 @@ class UserRole(BaseModel):
     role_id = pw.ForeignKeyField(Role, related_name="users")
     class Meta:
         primary_key = CompositeKey('user_id','role_id')
+
 
 class Contact(BaseModel):
     id = pw.PrimaryKeyField()
