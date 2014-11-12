@@ -1,0 +1,55 @@
+{
+  "data_sources":{
+    "prod": {
+        "apis": {
+           "my_api": {
+               "wrapper": "APIRequestWrapper",
+               "base_url": "http://123fakestreet.net",
+               "user": "<beast_user>",
+               "password": "<password>"
+           }
+        },
+        "dbs":{
+           "pg_heroku": {
+               "wrapper": "PostgresDB",
+               "host": "ec2-54-235-162-154.compute-1.amazonaws.com",
+               "user": "ufjb0gfs1n5kut",
+               "password": "puj1upt2rqkjr4rf2um2ranjm9",
+               "database": "dfg2tulf7263ut",
+               "port": 5572
+           }
+        }
+    },
+    "local": {
+        "apis": {
+           "my_api": {
+               "wrapper": "APIRequestWrapper",
+               "base_url": "http://123fakestreet.net",
+               "user": "<beast_user>",
+               "password": "<password>"
+           }
+        },
+        "dbs":{
+           "pg_local": {
+               "wrapper": "PostgresDB",
+               "host": "localhost",
+               "user": "ufjb0gfs1n5kut",
+               "password": "puj1upt2rqkjr4rf2um2ranjm9",
+               "database": "dfg2tulf7263ut",
+               "port": 5572
+           }
+        }
+    }
+  },
+  "install":{
+    "traits":{
+      "role":["administrator","estimator","contractor","client"],
+      "phase":["site-prep","demolition","cleanup"],
+      "area":["exterior","roof","kitchen","living-room","bedroom","bathroom","basement","deck"],
+      "category":["plumbing","electrical","flooring"],
+      "skill":[],
+      "contact_type":["primary","secondary","emergency","on-site"],
+      "channel_type":["email","phone","mobile-tel","mobile-sms"]
+    }
+  }
+}
