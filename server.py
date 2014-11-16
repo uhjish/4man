@@ -9,7 +9,7 @@ from flask_jwt import JWT, jwt_required
 from lib.models import db
 from lib.models.user import *
 from admin import AdminModelView, UserModelView, LogoutView, LoginView
-
+import os
 # Configuration  ==============================================================
 app = Flask(__name__)
 app.config.from_object('config.DevelopmentConfig')
@@ -93,9 +93,9 @@ def bootstrap_app():
 	if not app.config['TESTING']:
 		if db.session.query(User).count() == 0:
 			create_test_models();
-
+port = int(os.environ.get('PORT', 5000))
 # Start server  ===============================================================
 if __name__ == '__main__':		
 	with app.app_context():
 		init_app()
-	app.run()
+	app.run( debug=True, port=port)
