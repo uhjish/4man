@@ -27,7 +27,7 @@ class DevelopmentConfig(Config):
 	DEBUG = True
 
 class HerokuConfig(Config):
-	SQLALCHEMY_DATABASE_URI = pgurl
+    SQLALCHEMY_DATABASE_URI = 'postgresql://dvyjrgvbtlqzqq:X-beURc-TZPoKNEs4nYZcGwROM@ec2-54-83-5-151.compute-1.amazonaws.com:5432/d51l61lh2nmpl0'
 	#SQLALCHEMY_DATABASE_URI = 'sqlite:///data.sqlite'
 	DEBUG = True
 
