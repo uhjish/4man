@@ -1,4 +1,7 @@
 from datetime import timedelta
+import os
+
+pgurl = os.environ.get('HEROKU_POSTGRESQL_SILVER_URL')
 
 class Config(object):
 	DEBUG = False
@@ -20,6 +23,11 @@ class ProductionConfig(Config):
 
 class DevelopmentConfig(Config):
 	SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/4man'
+	#SQLALCHEMY_DATABASE_URI = 'sqlite:///data.sqlite'
+	DEBUG = True
+
+class HerokuConfig(Config):
+	SQLALCHEMY_DATABASE_URI = pgurl
 	#SQLALCHEMY_DATABASE_URI = 'sqlite:///data.sqlite'
 	DEBUG = True
 
