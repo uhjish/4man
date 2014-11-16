@@ -1,28 +1,27 @@
-import peewee as pw
 import datetime
-from base import *
+from __init__ import db
 from user import User
 from user import Contact
 
+note_property = db.Table('note_property',
+        db.Column('property_id', db.Integer, db.ForeignKey('property.id')),
+        db.Column('note_id', db.Integer, db.ForeignKey('note.id')))
+
+contact_property = db.Table('contact_property',
+        db.Column('property_id', db.Integer, db.ForeignKey('property.id')),
+        db.Column('contact_id', db.Integer, db.ForeignKey('contact.id')))
+
 class Property(BaseModel):
-    id = pw.PrimaryKeyField()
-    user = pw.ForeignKeyField( User, related_name="properties", index=True )
-    name = pw.CharField()
-    description = pw.CharField()
-    street = pw.CharField( index=True )
-    city = pw.CharField( index=True )
-    state = pw.CharField( index=True )
-    zipcode = pw.IntegerField( index=True )
-    latitude = pw.DoubleField()
-    longitude = pw.DoubleField()
+    id = db.Column(db.Integer, primary_key=True)
+    user = db.Column( db.Integer, db.ForeignKey('user.id') )
+    name = db.Column(db.String())
+    description = db.Column(db.String())
+    street =  db.Column(db.String())
+    city =  db.Column(db.String())
+    state =  db.Column(db.String())
+    zipcode = db.Column(db.Integer)
+    latitude = db.Column( db.Double )
+    longitude = db.Column( db.Double )
+    notes = db.relationship( 'Note', secondary='note_property', lazy='joined')
+    contacts = db.relationship( 'Contact', secondary='contact_property', lazy='joined')
 
-class PropertyContact(BaseModel):
-    id = pw.PrimaryKeyField()
-    property = pw.ForeignKeyField( Property, related_name="contacts", index=True )
-    contact = pw.ForeignKeyField( Contact, related_name="assoc_props", index=True )
-
-class PropertyNote(BaseModel):
-    id = pw.PrimaryKeyField()
-    property = pw.ForeignKeyField( Property, related_name="notes", index=True )
-    note = pw.CharField()
-    created_at = pw.DateTimeField( default=datetime.datetime.now )

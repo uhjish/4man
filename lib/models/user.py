@@ -1,67 +1,68 @@
-import peewee as pw
-from flask_peewee.auth import BaseUser
-from flask.ext.security import UserMixin, RoleMixin
+from __init__ import db
+from flask.ext.security import UserMixin, RoleMixin, SQLAlchemyUserDatastore
+from note import Note
+
 import datetime
 
-from base import BaseModel
-#db = Postgres
-#TODO: setup db config tool
+roles_users = db.Table('roles_users',
+		db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+		db.Column('role_id', db.Integer, db.ForeignKey('role.id')))
 
-class Role(BaseModel, RoleMixin):
-    name = pw.CharField(unique=True)
-    description = pw.CharField(null=True)
+notes_users = db.Table('notes_users',
+        db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+        db.Column('note_id', db.Integer, db.ForeignKey('note.id')))
 
+contacts_users = db.Table('contacts_users',
+        db.Column('user_id', db.Integer, db.ForeignKey('user.id')),
+        db.Column('contact_id', db.Integer, db.ForeignKey('contact.id')))
 
-class User(BaseModel, UserMixin):
-    email = pw.CharField()
-    username = pw.CharField()
-    password = pw.CharField()
-    fullname = pw.CharField(index=True)
-    details = pw.CharField(default='')
-    created_at = pw.DateTimeField(default=datetime.datetime.now)
-    confirmed_at = pw.DateTimeField(default=datetime.datetime.now)
-    last_login = pw.DateTimeField(default=datetime.datetime.now)
-    active = pw.BooleanField(default=True)
+class User(db.Model, UserMixin):
+	id = db.Column(db.Integer, primary_key=True)
+	email = db.Column(db.String(255), unique=True)
+	password = db.Column(db.String(255))
+	active = db.Column(db.Boolean())
+	confirmed_at = db.Column(db.DateTime())
+	roles = db.relationship('Role', secondary=roles_users,
+							backref=db.backref('users', lazy='dynamic'))
+	last_login_at = db.Column(db.DateTime)
+	current_login_at = db.Column(db.DateTime)
+	last_login_ip = db.Column(db.String(255))
+	current_login_ip = db.Column(db.String(255))
+	login_count = db.Column(db.Integer)
+    #notes = db.relationship('Note', secondary=notes_users, lazy='joined', join_depth=1)
+    #contacts = db.relationship('Contact', secondary=contacts_users, lazy='joined', join_depth=1)
+    #projects = db.relationship('Project', backref='user', lazy='dynamic')
+	def __repr__(self):
+		return 'User[email=%s]' % self.email
 
-class UserRole(BaseModel):
-    user = pw.ForeignKeyField(User, related_name="roles")
-    role = pw.ForeignKeyField(Role, related_name="users")
-    name = property(lambda self: self.role.name)
-    description = property(lambda self: self.role.description)
+class Role(db.Model, RoleMixin):
+	id = db.Column(db.Integer(), primary_key=True)
+	name = db.Column(db.String(80), unique=True)
+	description = db.Column(db.String(255))
 
-class UserNotes(BaseModel):
-    id = pw.PrimaryKeyField()
-    user = pw.ForeignKeyField(User, related_name="notes", index=True)
-    note = pw.CharField()
-    user_visible = pw.BooleanField(default=False)
-    contractor_visible = pw.BooleanField(default=False)
-    estimator_visible = pw.BooleanField(default=True)
-    created_at = pw.DateTimeField(default=datetime.datetime.now, index=True)
+user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 
-class Contact(BaseModel):
-    id = pw.PrimaryKeyField()
-    fullname = pw.CharField()
-    street = pw.CharField()
-    city = pw.CharField()
-    state = pw.CharField()
-    zipcode = pw.CharField()
+class Contact(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    fullname = db.Column(db.String())
+    street = db.Column(db.String())
+    city = db.Column(db.String())
+    state = db.Column(db.String())
+    zipcode = db.Column(db.String())
+    created_at = db.Column(db.DateTime, default=datetime.datetime.now )
+    channels = db.relationship('ContactItem', lazy='joined')
 
-class Channel(BaseModel):
-    id = pw.PrimaryKeyField()
-    name = pw.CharField()
-    desc = pw.CharField()
+class Channel(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String())
+    desc = db.Column(db.String())
 
-class ContactChannel(BaseModel):
-    id = pw.PrimaryKeyField()
-    contact = pw.ForeignKeyField(Contact, related_name="channels", index=True)
-    contact_type = pw.ForeignKeyField(Channel, related_name="contacts_using", index=True)
-    contact_info = pw.CharField(index=True)
-
-class UserContact(BaseModel):
-    id = pw.PrimaryKeyField()
-    user = pw.ForeignKeyField( User, related_name="contacts")
-    contact = pw.ForeignKeyField( Contact, related_name="user")
-    is_primary = pw.BooleanField()
-    label = pw.CharField()
-
+class ContactItem(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    identifier = db.Column(db.String())
+    channel = db.Column( db.Integer, db.ForeignKey('channel.id') ) 
+    description = db.Column( db.String() )
+    contact = db.Column( db.Integer, db.ForeignKey('contact.id') )
+    label = db.Column(db.String())
+    is_primary = db.Column(db.Boolean, default=False)
 

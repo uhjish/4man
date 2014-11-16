@@ -1,30 +1,26 @@
-import peewee as pw
 import datetime
-
-from base import BaseModel
+from __init__ import db
 from user import User
 from property import Property
+from note import Note
 
-class ProjectStatus(BaseModel):
-    id = pw.PrimaryKeyField()
-    status = pw.CharField()
+notes_projects = db.table('notes_projects',
+        db.Column( 'project_id', db.Integer, db.ForeignKey('project.id')),
+        db.Column( 'note_id', db.Integer, db.ForeignKey('note.id')))
 
-class Project(BaseModel):
+
+class ProjectStatus(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    status = db.Column(db.String())
+
+class Project(db.Model):
     shortname = pw.CharField( index=True )
-    description = pw.CharField()
-    project_status = pw.ForeignKeyField(ProjectStatus, related_name="projects", index=True)
-    created_at = pw.CharField()
-    updated_at = pw.CharField()
+    description = db.Column(db.String())
+    user = db.Column( db.Integer, db.ForeignKeyField('user.id') )
+    property = db.Column( db.Integer, db.ForeignKeyField('property.id') )
+    status = db.Column( db.Integer, db.ForeignKeyField('projectstatus.id') )
+    created_at = db.Column(db.String())
+    updated_at = db.Column(db.String())
+    notes = db.relationship( 'Note', secondary=notes_projects, lazy='dynamic' ) 
 
-class UserProject(BaseModel):
-    id = pw.PrimaryKeyField()
-    user = pw.ForeignKeyField(User, related_name="projects", index=True)
-    property = pw.ForeignKeyField(Property, related_name="projects")
-    project = pw.ForeignKeyField(Project, related_name="owners")
-
-
-class ProjectNote(BaseModel):
-    id = pw.PrimaryKeyField()
-    note = pw.CharField()
-    created_at = pw.DateTimeField( default=datetime.datetime.now )
 
