@@ -7,18 +7,18 @@ contractor_skills = db.Table('contractor_skills',
         db.Column('rating', db.Integer),
         db.Column('details', db.String()))
 
-class Skill(BaseModel):
+class Skill(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String())
     description = db.Column(db.String())
 
-class Contractor(BaseModel):
+class Contractor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String())
     contact = db.Column( db.Integer, db.ForeignKey( 'contact.id' ) )
     user = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
     skills = db.relationship( 'Skill', secondary='contractor_skills', 
                             backref=db.backref('contractors', lazy='dynamic'))
-    description = pw.TextField()
+    description = db.Column(db.String())
 
 
