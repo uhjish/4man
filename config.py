@@ -19,8 +19,8 @@ class ProductionConfig(Config):
 	SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/4man'
 
 class DevelopmentConfig(Config):
-	#SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/4man'
-	SQLALCHEMY_DATABASE_URI = 'sqlite:///data.sqlite'
+	SQLALCHEMY_DATABASE_URI = 'postgresql://localhost/4man'
+	#SQLALCHEMY_DATABASE_URI = 'sqlite:///data.sqlite'
 	DEBUG = True
 
 class TestingConfig(Config):

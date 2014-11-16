@@ -8,7 +8,7 @@ from flask.ext.admin import Admin
 from flask_jwt import JWT, jwt_required
 from lib.models import db
 from lib.models.user import *
-from admin import AdminModelView, UserModelView, LogoutView, LoginView
+from lib.admin import AdminModelView, UserModelView, LogoutView, LoginView
 import os
 # Configuration  ==============================================================
 app = Flask(__name__)
@@ -54,18 +54,13 @@ def auth_func(**kw):
 	return True
 
 apimanager = APIManager(app, flask_sqlalchemy_db=db)
+apimanager.create_api(User,
+	methods=['GET', 'POST', 'DELETE', 'PUT'],
+)
 apimanager.create_api(Contact,
 	methods=['GET', 'POST', 'DELETE', 'PUT'],
-	url_prefix='/api/v1',
-	collection_name='free_stuff',
-	include_columns=['data1', 'data2', 'user_id'])
-apimanager.create_api(Contact,
-	methods=['GET', 'POST', 'DELETE', 'PUT'],
-	url_prefix='/api/v1',
 	preprocessors=dict(GET_SINGLE=[auth_func], GET_MANY=[auth_func]),
-	collection_name='protected_stuff',
-	include_columns=['data1', 'data2', 'user_id'])
-
+)
 # Flask-Admin  ================================================================
 admin = Admin(app)
 admin.add_view(UserModelView(User, db.session, category='Auth'))
