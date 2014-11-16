@@ -17,7 +17,7 @@ from lib.admin import AdminModelView, UserModelView, LogoutView, LoginView
 import os
 # Configuration  ==============================================================
 app = Flask(__name__)
-app.config.from_object('config.DevelopmentConfig')
+app.config.from_object('config.HerokuConfig')
 
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 
