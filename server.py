@@ -8,6 +8,11 @@ from flask.ext.admin import Admin
 from flask_jwt import JWT, jwt_required
 from lib.models import db
 from lib.models.user import *
+from lib.models.contractor import *
+from lib.models.line_item import *
+from lib.models.project import *
+from lib.models.property import *
+from lib.models.note import *
 from lib.admin import AdminModelView, UserModelView, LogoutView, LoginView
 import os
 # Configuration  ==============================================================
@@ -63,9 +68,15 @@ apimanager.create_api(Contact,
 )
 # Flask-Admin  ================================================================
 admin = Admin(app)
-admin.add_view(UserModelView(User, db.session, category='Auth'))
-admin.add_view(AdminModelView(Role, db.session, category='Auth'))
-admin.add_view(AdminModelView(Contact, db.session))
+admin.add_view(UserModelView(User, db.session, category='User'))
+admin.add_view(AdminModelView(Role, db.session, category='User'))
+admin.add_view(AdminModelView(Contact, db.session),category="Annotations")
+admin.add_view(AdminModelView(Note, db.session),category="Annotations")
+admin.add_view(AdminModelView(Property, db.session),category="Proj")
+admin.add_view(AdminModelView(Project, db.session),category="Proj")
+admin.add_view(AdminModelView(LineItem, db.session),category="Proj")
+admin.add_view(AdminModelView(LineSubitem, db.session),category="Proj")
+admin.add_view(AdminModelView(Contractor, db.session),category="Annotations")
 admin.add_view(LogoutView(name='Logout', endpoint='logout'))
 admin.add_view(LoginView(name='Login', endpoint='login'))
 
