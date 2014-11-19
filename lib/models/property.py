@@ -13,9 +13,9 @@ contact_property = db.Table('contact_property',
 
 class Property(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user = db.Column( db.Integer, db.ForeignKey('user.id') )
+    user_id = db.Column( db.Integer, db.ForeignKey('user.id') )
     name = db.Column(db.String())
-    description = db.Column(db.String())
+    desc= db.Column(db.String())
     street =  db.Column(db.String())
     city =  db.Column(db.String())
     state =  db.Column(db.String())
@@ -24,4 +24,6 @@ class Property(db.Model):
     longitude = db.Column( db.Numeric )
     notes = db.relationship( 'Note', secondary='note_property', lazy='joined')
     contacts = db.relationship( 'Contact', secondary='contact_property', lazy='joined')
-
+    projects = db.relationship( 'Project', backref='property', lazy='joined')
+    def __repr__(self):
+        return self.id

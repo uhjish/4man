@@ -23,24 +23,25 @@ class User(db.Model, UserMixin):
     active = db.Column(db.Boolean())
     confirmed_at = db.Column(db.DateTime())
     roles = db.relationship('Role', secondary=roles_users,
-            backref=db.backref('users', lazy='dynamic'))
+            backref=db.backref('users', lazy='joined'))
     last_login_at = db.Column(db.DateTime)
     current_login_at = db.Column(db.DateTime)
     last_login_ip = db.Column(db.String(255))
     current_login_ip = db.Column(db.String(255))
     login_count = db.Column(db.Integer)
-    notes = db.relationship('Note', secondary=notes_users, lazy='dynamic')
-    contacts = db.relationship('Contact', secondary=contacts_users, lazy='dynamic')
-    projects = db.relationship('Project', backref='client', lazy='dynamic')
+    notes = db.relationship('Note', secondary=notes_users, lazy='joined')
+    contacts = db.relationship('Contact', secondary=contacts_users, lazy='joined')
+    projects = db.relationship('Project', backref='client', lazy='joined')
     def __repr__(self):
         return 'User[email=%s]' % self.email
 
 class Role(db.Model, RoleMixin):
     id = db.Column(db.Integer(), primary_key=True)
     name = db.Column(db.String(80), unique=True)
-    description = db.Column(db.String(255))
+    desc= db.Column(db.String(255))
+    def __repr__(self):
+        return self.name 
 
-user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 
 class Contact(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -51,18 +52,25 @@ class Contact(db.Model):
     zipcode = db.Column(db.String())
     created_at = db.Column(db.DateTime, default=datetime.datetime.now )
     channels = db.relationship('ContactItem', lazy='joined')
+    def __repr__(self):
+        return "%s - %s" % (self.fullname , self.city )
 
 class Channel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String())
     desc = db.Column(db.String())
+    def __repr__(self):
+        return self.name 
 
 class ContactItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     identifier = db.Column(db.String())
-    channel = db.Column( db.Integer, db.ForeignKey('channel.id') ) 
-    description = db.Column( db.String() )
-    contact = db.Column( db.Integer, db.ForeignKey('contact.id') )
+    channel_id = db.Column( db.Integer, db.ForeignKey('channel.id') ) 
+    contact_id = db.Column( db.Integer, db.ForeignKey('contact.id') )
+    desc= db.Column( db.String() )
     label = db.Column(db.String())
     is_primary = db.Column(db.Boolean, default=False)
-
+    channel = db.relationship( Channel )
+    contact = db.relationship( Contact )
+    def __repr__(self):
+        return "%d,%d:%s" %(self.contact_id, self.id, self.label) 

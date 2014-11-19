@@ -54,8 +54,8 @@ put_res = jr.req('/api/contact/2', typ='PUT',
                 'zipcode':54321})
 print jpp( put_res.json() )
 
-del_res = jr.req('/api/contact/1', typ='DELETE')
-print jpp( del_res.json() )
+del_res = jr.req('/api/contact/2', typ='DELETE')
+print  del_res.json() 
 
 #-- make get request
 get_res = jr.req('/api/contact')

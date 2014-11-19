@@ -8,4 +8,6 @@ class Note(db.Model):
     contractor_visible = db.Column(db.Boolean, default=False)
     estimator_visible = db.Column(db.Boolean, default=False)
     created_at = db.Column( db.DateTime, default=datetime.datetime.now )
+    def __repr__(self):
+        return self.note[0:10] 
 
