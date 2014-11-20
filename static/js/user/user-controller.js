@@ -42,13 +42,10 @@ angular.module('manpower')
       $scope.clear = function () {
         $scope.user = {
           
-          "username": "",
-          
           "email": "",
           
           "password": "",
           
-          "id": ""
         };
       };
 

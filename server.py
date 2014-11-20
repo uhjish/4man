@@ -15,6 +15,7 @@ from lib.models.property import *
 from lib.models.note import *
 from lib.admin import AdminModelView, UserModelView, LogoutView, LoginView
 from dummy_data import init_models
+import simplejson as json
 import os,sys
 
 # Configuration  ==============================================================
@@ -41,15 +42,21 @@ def load_user(payload):
 	return user
 
 # Views  ======================================================================
-@app.route('/')
-def home():
-	return render_template('index.html')
+#@app.route('/')
+#def home():
+#	return render_template('index.html')
 
 @app.route('/mypage')
 #@login_required
 def mypage():
         print >>sys.stderr, "ouch"
 	return app.send_static_file('example.html')
+
+@app.route('/')
+#@login_required
+def apage():
+        print >>sys.stderr, "ouch"
+	return app.send_static_file('app.html')
 
 @app.route('/logout')
 def log_out():
@@ -63,7 +70,9 @@ def auth_func(**kw):
 
 apimanager = APIManager(app, flask_sqlalchemy_db=db)
 apimanager.create_api(User,
-	methods=['GET', 'POST', 'DELETE', 'PUT'],)
+	methods=['GET', 'POST', 'DELETE', 'PUT'],
+#	preprocessors=dict(GET_SINGLE=[auth_func], GET_MANY=[auth_func]),
+)
 apimanager.create_api(Role,
 	methods=['GET', 'POST', 'DELETE', 'PUT'],
 #	preprocessors=dict(GET_SINGLE=[auth_func], GET_MANY=[auth_func]),
@@ -109,6 +118,10 @@ apimanager.create_api(Phase,
 #	preprocessors=dict(GET_SINGLE=[auth_func], GET_MANY=[auth_func]),
 )
 apimanager.create_api(Category,
+	methods=['GET', 'POST', 'DELETE', 'PUT'],
+#	preprocessors=dict(GET_SINGLE=[auth_func], GET_MANY=[auth_func]),
+)
+apimanager.create_api(ProjectStatus,
 	methods=['GET', 'POST', 'DELETE', 'PUT'],
 #	preprocessors=dict(GET_SINGLE=[auth_func], GET_MANY=[auth_func]),
 )

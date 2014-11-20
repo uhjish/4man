@@ -1,9 +1,79 @@
 // Declare app level module which depends on filters, and services
-angular.module('manpower', ['ngResource', 'ngRoute', 'ui.bootstrap', 'ui.date'])
-  .config(['$routeProvider', function ($routeProvider) {
+var app = angular.module('manpower', ['ngResource', 'ngRoute', 'restangular','ui.bootstrap', 'ui.date', 'ngCookies', 'xeditable'])
+  .config(function ($routeProvider, RestangularProvider) {
     $routeProvider
-      .when('/', {
+      .when('/app/', {
         templateUrl: 'views/home/home.html', 
         controller: 'HomeController'})
       .otherwise({redirectTo: '/'});
-  }]);
+
+    // configure restangular
+    //RestangularProvider.setBaseUrl('/api');
+
+    // configure the response extractor for each request
+    RestangularProvider.setResponseExtractor(function(response, operation) {
+      // This is a get for a list
+      var newResponse;
+      if (operation === 'getList') {
+        // Return the result objects as an array and attach the metadata
+        newResponse = response.objects;
+        newResponse.metadata = {
+          numResults: response.num_results,
+          page: response.page,
+          totalPages: response.total_pages
+        };
+      } else {
+        // This is an element
+        newResponse = response;
+      }
+      return newResponse;
+    });
+});
+app.factory('$modalogin', ['$rootScope', '$modal', '$http', '$cookieStore', '$q', function ($scope, $modal, $http, $cookie, $q) {
+    
+    return {
+        login : function () {
+
+            var deferred = $q.defer();
+            
+            if ($cookie.get('token')) {
+                deferred.resolve($cookie.get('token'));
+                return deferred.promise;
+            }          
+
+            var scope = $scope.$new(false);
+            
+            var modal = $modal.open({
+                templateUrl: '/static/templates/modal_auth.html',
+                scope: scope,
+                keyboard: false,
+            });
+
+            scope.auth = {};
+            scope.error = '';
+
+            scope.do_auth = function () {
+                $http({
+                    url: '/api/v1/auth',
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    data: scope.auth,
+                }).success(function(data, status) {
+                    $cookie.put('token', data.token);
+                    modal.close();
+                    deferred.resolve(data.token);
+                }).error(function(data, status) {
+                    scope.error = data.description;
+                });
+
+            };
+            
+            return deferred.promise;
+        }
+    };
+
+}]);
+
+app.run(function(editableOptions) {
+  editableOptions.theme = 'bs3';
+});

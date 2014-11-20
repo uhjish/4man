@@ -7,7 +7,6 @@ class Phase(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String())
     desc = db.Column(db.String())
-    line_items = db.relationship('LineItem',backref='phase',lazy='dynamic')
     def __repr__(self):
         return self.name
 
@@ -15,7 +14,6 @@ class Area(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String())
     desc = db.Column(db.String())
-    line_items = db.relationship('LineItem',backref='area',lazy='dynamic')
     def __repr__(self):
         return self.name
 
@@ -23,7 +21,6 @@ class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String())
     desc = db.Column(db.String())
-    line_items = db.relationship('LineItem',backref='category',lazy='dynamic')
     def __repr__(self):
         return self.name
 
@@ -43,6 +40,9 @@ class LineItem(db.Model):
     is_active = db.Column(db.Boolean, default=True)
     updated_at = db.Column( db.DateTime, default=datetime.datetime.now )
     deleted_at = db.Column( db.DateTime, nullable=True)
+    area = db.relationship('Area', lazy='joined')
+    phase = db.relationship('Phase', lazy='joined')
+    category = db.relationship('Category', lazy='joined')
     linesubitems = db.relationship('LineSubitem', backref='parentitem', lazy='joined')
     contractors = db.relationship('Contractor', secondary=li_contractor, backref='lineitems', lazy='joined') 
     images = db.relationship('SiteImage', backref='parentitem', lazy='joined')
@@ -57,7 +57,7 @@ class LineSubitem(db.Model):
     is_active = db.Column(db.Boolean, default=True)
     updated_at = db.Column( db.DateTime, default=datetime.datetime.now )
     deleted_at = db.Column( db.DateTime, nullable=True) 
-    subitemcosts = db.relationship('LineSubitemCost', backref='parentsubitem', lazy='joined')
+    subitemcosts = db.relationship('LineSubitemCost', backref='parentsubitem', lazy='subquery')
     def __repr__(self):
         return 'project: %d - %d.%d' % (self.parentitem.project_id, self.lineitem_id, self.id)
 
@@ -70,7 +70,7 @@ class LineSubitemCost(db.Model):
     created_at = db.Column( db.DateTime, default=datetime.datetime.now )
     deleted_at = db.Column( db.DateTime, nullable=True)
     def __repr__(self):
-        return str(is_estimate) + " %s, %s" % (self.material_cost,self.labor_cost)
+        return str(self.is_estimate) + " %s, %s" % (self.material_cost,self.labor_cost)
     
 class SiteImage(db.Model):
     image_uuid = db.Column( db.String(), primary_key=True ) 

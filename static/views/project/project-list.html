@@ -1,0 +1,255 @@
+
+<div>
+
+  <!--
+    <button class="btn btn-primary btn-lg" ng-click="create()">
+        <span class="glyphicon glyphicon-flash"></span> New Project
+    </button>
+    -->
+  <div id="project-selector" class="container" ng-hide="editMode" >
+    <h2>Browse Projects</h2>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover">
+        <tbody>
+          <tr ng-repeat="project in projects" ng-click="alert(project);">
+            <td>
+              <h4>{{project.shortname}}</h4>
+              <b>client:</b>{{project.client.email}}<br>
+              <b>status:</b>{{project.status.status}}<br>
+            </td><td>
+              <b>address:</b><br>
+              {{project.property.street}}<br>{{project.property.city}},{{project.property.state}} {{project.property.zipcode}}<br> 
+            </td><td><b>description</b><br>{{project.desc}}
+            </td>
+            <td align=right>
+              <img src="img/generic-house.jpeg" height=150/>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div id="project-editor" class="container" ng-show="editMode">
+    <h2>Edit Project > {{currentProject.shortname}}</h2>
+    <div class="row clearfix">
+      <div class="col-md-6 col-sm-6 column">
+        <div class="panel panel-default">
+          <form editable-form name="editProjectForm" onaftersave="saveProject()">
+            <div class="panel-heading" style="background-color:#ddd;">
+              <div>
+                <h4>
+                  <span class="title" style="background-color:#ddd;">Project:</span> 
+                  <span editable-text="currentProject.shortname" e-name="projectShortName" e-required style="background-color:#ddd;">
+                    {{currentProject.shortname || 'project-name'}}
+                  </span>
+                </h4>
+              </div>
+            </div>
+            <div class="panel-body">
+              <div>
+                <span class="title">Client:</span> 
+                {{currentProject.client.email}} <br>
+              </div>
+              <div>
+                <span class="title">Status:</span> 
+                <span editable-select="currentProject.status_id" e-name="projectStatus" e-ng-options="s.status as s.status for s in statuses" >
+                  {{ showStatus() }}
+                </span>
+              </div>
+              <div>
+                <span class="title"Description:</span>
+                <span editable-textarea="currentProject.desc" e-rows=4 e-cols=40>
+                  <pre>{{currentProject.desc || 'no description'}}</pre>
+                </span>
+              </div>
+            </div>
+            <div class="panel-footer">
+              <div class="buttons">
+                <!-- button to show form -->
+                <button type="button" class="btn btn-default" ng-click="editProjectForm.$show()" ng-show="!editProjectForm.$visible">
+                  Edit
+                </button>
+                <!-- buttons to submit / cancel form -->
+                <span ng-show="editProjectForm.$visible">
+                  <button type="submit" class="btn btn-primary" ng-disabled="editProjectForm.$waiting">
+                    Save
+                  </button>
+                  <button type="button" class="btn btn-default" ng-disabled="editProjectForm.$waiting" ng-click="editProjectForm.$cancel()">
+                    Cancel
+                  </button>
+                </span>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6 column">
+        <div class="panel panel-default">
+          <form editable-form name="editPropertyForm" onaftersave="saveProperty()">
+            <div class="panel-heading" style="background-color:#ddd;">
+              <div>
+                <h4>
+                  <span class="title" style="background-color:#ddd;">Property:</span> 
+                  <span editable-text="currentProject.property.name" e-name="projectShortName" e-required style="background-color:#ddd;">
+                    {{currentProject.property.name || 'property-name'}}
+                  </span>
+                </h4>
+              </div>
+            </div>
+            <div class="panel-body">
+              <div>
+                <span class="title">Street:</span>
+                <span editable-text="currentProject.property.street">
+                  {{currentProject.property.street || 'no description'}}
+                </span>
+              </div>
+              <div>
+                <span class="title">City:</span>
+                <span editable-text="currentProject.property.city">
+                  {{currentProject.property.city || 'no description'}}
+                </span>
+                <span class="title">State:</span>
+                <span editable-text="currentProject.property.state">
+                  {{currentProject.property.state || 'no description'}}
+                </span>
+                <span class="title">Zip:</span>
+                <span editable-text="currentProject.property.zipcode">
+                  {{currentProject.property.zipcode || 'no description'}}
+                </span>
+              </div>
+              <div>
+                <span class="title"Description:</span>
+                <span editable-textarea="currentProject.property.desc" e-rows=4 e-cols=40>
+                  <pre>{{currentProject.property.desc || 'no description'}}</pre>
+                </span>
+              </div>
+            </div>
+            <div class="panel-footer">
+              <div class="buttons">
+                <!-- button to show form -->
+                <button type="button" class="btn btn-default" ng-click="editPropertyForm.$show()" ng-show="!editPropertyForm.$visible">
+                  Edit
+                </button>
+                <!-- buttons to submit / cancel form -->
+                <span ng-show="editPropertyForm.$visible">
+                  <button type="submit" class="btn btn-primary" ng-disabled="editPropertyForm.$waiting">
+                    Save
+                  </button>
+                  <button type="button" class="btn btn-default" ng-disabled="editPropertyForm.$waiting" ng-click="editPropertyForm.$cancel()">
+                    Cancel
+                  </button>
+                </span>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+        <div class="btn-group">
+          <button class="btn btn-default">Action</button> <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li>
+              <a href="#">Action</a>
+            </li>
+            <li class="disabled">
+              <a href="#">Another action</a>
+            </li>
+            <li class="divider">
+            </li>
+            <li>
+              <a href="#">Something else here</a>
+            </li>
+          </ul>
+        </div> <button type="button" class="btn btn-xs btn-primary">Default</button>
+
+        
+        
+        <div class="panel panel-default">
+            <div class="panel-heading" style="background-color:#ddd;">
+              <div>
+                <h4>
+                  <span class="title" style="background-color:#ddd;">Line Items</span> 
+
+                </h4>
+              </div>
+            </div>
+            <div class="panel-body">
+              <accordion close-others=true>
+                <accordion-group ng-repeat="li in lineItems">
+                  <accordion-heading>
+                    <div class="panel panel-default">
+                      <div class="col-md-6 col-sm-6 column">
+                        {{li.title}}
+                      </div> 
+                      <div class="col-md-6 col-sm-6 column" align="right">
+                        <label class="btn btn-xs btn-primary">
+                          {{li.area.name}}
+                        </label>
+                        <label class="btn btn-xs btn-info">
+                          {{li.phase.name}}
+                        </label>
+                        <label class="btn btn-xs btn-success">
+                          {{li.category.name}}
+                        </label>
+                      </div> 
+                    </div>
+                    </accordion-heading>
+                  {{li.desc}}
+                  <div ng-controller="LineItemController" ng-init="init(li.id)" ng-include="'views/line_item/line_item.html'">
+                  </div>
+                </accordion-group>
+              </accordion>
+            </div>
+          </div>
+        
+        
+        <!--          <div class="carousel slide" id="carousel-992512">
+          <ol class="carousel-indicators">
+              <li data-slide-to="0" data-target="#carousel-992512">
+              </li>
+              <li data-slide-to="1" data-target="#carousel-992512" class="active">
+              </li>
+              <li data-slide-to="2" data-target="#carousel-992512">
+              </li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="item">
+                <img alt="" src="http://lorempixel.com/1600/500/sports/1">
+                <div class="carousel-caption">
+                  <h4>
+                    First Thumbnail label
+                  </h4>
+                  <p>
+                    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                  </p>
+                </div>
+              </div>
+              <div class="item active">
+                <img alt="" src="http://lorempixel.com/1600/500/sports/2">
+                <div class="carousel-caption">
+                  <h4>
+                    Second Thumbnail label
+                  </h4>
+                  <p>
+                    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                  </p>
+                </div>
+              </div>
+              <div class="item">
+                <img alt="" src="http://lorempixel.com/1600/500/sports/3">
+                <div class="carousel-caption">
+                  <h4>
+                    Third Thumbnail label
+                  </h4>
+                  <p>
+                    Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.
+                  </p>
+                </div>
+              </div>
+            </div> <a class="left carousel-control" href="#carousel-992512" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-992512" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+          </div>
+          -->
+      </div>
+    </div>
+  </div>
+</div>
