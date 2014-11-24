@@ -44,7 +44,7 @@ def load_user(payload):
 # Views  ======================================================================
 @app.route('/')
 def home():
-	return render_template('index.html')
+	return app.send_static_file('index2.html')
 @app.route('/mypage')
 #@login_required
 def mypage():
