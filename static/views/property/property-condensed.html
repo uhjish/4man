@@ -1,0 +1,51 @@
+<div class="panel panel-default">
+  <form editable-form name="editPropertyForm" onbeforesave="validateAddress(editPropertyForm.street.$modelValue, editPropertyForm.city.$modelValue, editPropertyForm.state.$modelValue)" onaftersave="console.log('saved')">
+    <div class="panel-heading" style="background-color:#ddd;">
+      <div class="row clearfix">
+        <div class="col-md-8 col-sm-8 column">
+          Property
+        </div>
+        <div class="col-md-4 col-sm-4 column" align="right">
+          <div class="buttons">
+            <!-- button to show map -->
+            <a type="button" href="{{currentProperty.map_url}}" target="_blank" class="btn btn-default btn-xs"  ng-show="!editPropertyForm.$visible">
+              Map
+            </a>
+            <!-- button to show form -->
+            <button type="button" class="btn btn-default btn-xs" ng-click="editPropertyForm.$show()" ng-show="!editPropertyForm.$visible">
+              Edit
+            </button>
+            <!-- buttons to submit / cancel form -->
+            <span ng-show="editPropertyForm.$visible">
+              <button type="submit" class="btn btn-primary btn-xs" ng-disabled="editPropertyForm.$waiting">
+                Save
+              </button>
+              <button type="button" class="btn btn-default btn-xs" ng-disabled="editPropertyForm.$waiting" ng-click="editPropertyForm.$cancel()">
+                Cancel
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <div>
+        <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{ alert.msg }}</alert>
+      </div>
+      <div>
+        <span editable-text="currentProperty.street" e-name="street">
+          {{currentProperty.street || 'street address'}}
+        </span>
+      </div>
+      <div>
+        <span editable-text="currentProperty.city" e-name="city">
+          {{currentProperty.city || 'city'}}
+        </span>
+        <span editable-text="currentProperty.state" e-name="state">
+          {{currentProperty.state || 'state'}}
+        </span>
+        {{currentProperty.zipcode || 'zipcode'}}
+      </div>
+    </div>
+  </form>
+</div>

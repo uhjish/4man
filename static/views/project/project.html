@@ -1,0 +1,162 @@
+
+<div class="pagemenu affix header-fixed" style=" position: fixed; right: 0; top: 300px; margin:5px;  text-align:right;">
+  <a href="" ng-click="gotoAnchor(1)">
+    <i class="fa fa-arrow-up fa-2x"></i>
+  </a><br>
+  <a href="" ng-click="gotoAnchor(2)">
+    <i class="fa fa-list fa-2x"></i>
+  </a><br>
+  <a href="" ng-click="gotoAnchor(3)">
+    <i class="fa fa-camera fa-2x"></i>
+  </a><br>
+  <a href="" ng-click="gotoAnchor(4)">
+    <i class="fa fa-exclamation-circle fa-2x"></i>
+  </a><br>
+</div>
+<div id="project-editor" class="container">
+  <h2><a href="#/projects">Projects</a> > {{currentProject.shortname}}</h2>
+  <!--    <div>
+      <div class="gutter"></div>
+      <pagemenu affix></pagemenu>
+    </div>
+  </div> -->
+  <div class="row clearfix">
+    <div class="col-md-6 col-sm-6 column">
+      <div class="panel panel-default" id="anchor1">
+        <form editable-form name="editProjectForm" onaftersave="saveProject()">
+          <div class="panel-heading" style="background-color:#ddd;">
+            <div>
+              <h4 class="pageitem" id="1">
+                <span class="title" style="background-color:#ddd;">Project:</span> 
+                <span editable-text="currentProject.shortname" e-name="projectShortName" e-required style="background-color:#ddd;">
+                  {{currentProject.shortname || 'project-name'}}
+                </span>
+              </h4>
+            </div>
+          </div>
+          <div class="panel-body">
+            <div>
+              <span class="title">Client:</span> 
+              {{currentProject.client.email}} <br>
+              <div>
+                <span class="title">Status:</span> 
+                <span editable-select="currentProject.status_id" e-name="projectStatus" e-ng-options="s.id as s.status for s in statuses" >
+                  {{ showProjectStatus() }}
+                </span>
+              </div>
+              <div>
+                <span class="title"Description:</span>
+                <span editable-textarea="currentProject.desc" e-rows=4 e-cols=40>
+                  <pre>{{currentProject.desc || 'no description'}}</pre>
+                </span>
+              </div>
+            </div>
+            <div class="panel-footer">
+              <div class="buttons">
+                <!-- button to show form -->
+                <button type="button" class="btn btn-default" ng-click="editProjectForm.$show()" ng-show="!editProjectForm.$visible">
+                  Edit
+                </button>
+                <!-- buttons to submit / cancel form -->
+                <span ng-show="editProjectForm.$visible">
+                  <button type="submit" class="btn btn-primary" ng-disabled="editProjectForm.$waiting">
+                    Save
+                  </button>
+                  <button type="button" class="btn btn-default" ng-disabled="editProjectForm.$waiting" ng-click="editProjectForm.$cancel()">
+                    Cancel
+                  </button>
+                </span>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-6 column">
+      <div id="property_div" ng-controller="PropertyController" ng-include="'views/property/property-condensed.html'">
+      </div>
+
+      <div id="client_div" ng-controller="ClientController" ng-init="init( currentProject.client_id )" ng-include="'views/client/client-condensed.html'">
+      </div>
+
+    </div>
+  </div>
+
+
+
+  <div class="panel panel-default" id="anchor2">
+    <div class="panel-heading" style="background-color:#ddd;">
+      <div class="row clearfix">
+        <div class="col-md-8 col-sm-8 column">
+          <h4 >
+            <span class="title" style="background-color:#ddd;">Line Items</span> 
+          </h4>
+        </div>
+        <div class="col-md-4 col-sm-4 column" align="right">
+          <button type="button" class="btn btn-primary">Add Line Item</button>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+      <accordion close-others=true>
+      <accordion-group ng-repeat="li in lineItems">
+      <accordion-heading>
+      <div class="panel panel-default">
+        <div class="col-md-6 col-sm-6 column">
+          {{li.title}}
+        </div> 
+        <div class="col-md-6 col-sm-6 column" align="right">
+          <label class="btn btn-xs btn-primary">
+            {{li.area.name}}
+          </label>
+          <label class="btn btn-xs btn-info">
+            {{li.phase.name}}
+          </label>
+          <label class="btn btn-xs btn-success">
+            {{li.category.name}}
+          </label>
+        </div> 
+      </div>
+      </accordion-heading>
+      {{li.desc}}
+      <div ng-controller="LineItemController" ng-init="init(li.id)" ng-include="'views/line_item/line_item.html'">
+      </div>
+      </accordion-group>
+      </accordion>
+    </div>
+  </div>
+</div>
+</div>
+  <div class="panel panel-default" id="anchor3">
+    <div class="panel-heading" style="background-color:#ddd;">
+      <div class="row clearfix">
+        <div class="col-md-8 col-sm-8 column">
+          <h4 >
+            <span class="title" style="background-color:#ddd;">Images</span> 
+          </h4>
+        </div>
+        <div class="col-md-4 col-sm-4 column" align="right">
+          <button type="button" class="btn btn-primary">Add Image</button>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+    </div>
+  </div>
+  <div class="panel panel-default" id="anchor4">
+    <div class="panel-heading" style="background-color:#ddd;">
+      <div class="row clearfix">
+        <div class="col-md-8 col-sm-8 column">
+          <h4 >
+            <span class="title" style="background-color:#ddd;">Notes</span> 
+          </h4>
+        </div>
+        <div class="col-md-4 col-sm-4 column" align="right">
+          <button type="button" class="btn btn-primary">Add Note</button>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body">
+    </div>
+  </div>
+</div>

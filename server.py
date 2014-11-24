@@ -42,17 +42,16 @@ def load_user(payload):
 	return user
 
 # Views  ======================================================================
-#@app.route('/')
-#def home():
-#	return render_template('index.html')
-
+@app.route('/')
+def home():
+	return render_template('index.html')
 @app.route('/mypage')
 #@login_required
 def mypage():
         print >>sys.stderr, "ouch"
 	return app.send_static_file('example.html')
 
-@app.route('/')
+@app.route('/app')
 #@login_required
 def apage():
         print >>sys.stderr, "ouch"
@@ -78,6 +77,14 @@ apimanager.create_api(Role,
 #	preprocessors=dict(GET_SINGLE=[auth_func], GET_MANY=[auth_func]),
 )
 apimanager.create_api(Contact,
+	methods=['GET', 'POST', 'DELETE', 'PUT'],
+#	preprocessors=dict(GET_SINGLE=[auth_func], GET_MANY=[auth_func]),
+)
+apimanager.create_api(ContactItem,
+	methods=['GET', 'POST', 'DELETE', 'PUT'],
+#	preprocessors=dict(GET_SINGLE=[auth_func], GET_MANY=[auth_func]),
+)
+apimanager.create_api(Channel,
 	methods=['GET', 'POST', 'DELETE', 'PUT'],
 #	preprocessors=dict(GET_SINGLE=[auth_func], GET_MANY=[auth_func]),
 )

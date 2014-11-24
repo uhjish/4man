@@ -26,6 +26,7 @@ class Project(db.Model):
     updated_at = db.Column(db.String())
     notes = db.relationship( 'Note', secondary=notes_projects, lazy='joined' )
     line_items = db.relationship( 'LineItem', backref='parent_project', lazy='joined', join_depth=5)
+    images = db.relationship('SiteImage', backref='parentproject', lazy='joined')
     status = db.relationship( ProjectStatus )
     def __repr__(self):
         return self.shortname

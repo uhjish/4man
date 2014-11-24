@@ -74,8 +74,9 @@ class LineSubitemCost(db.Model):
     
 class SiteImage(db.Model):
     image_uuid = db.Column( db.String(), primary_key=True ) 
+    #image_ext = db.Column( db.String(4) );
     project_id = db.Column( db.Integer, db.ForeignKey('project.id'))
     lineitem_id = db.Column( db.Integer, db.ForeignKey('line_item.id'), nullable=True)
     created_at = db.Column( db.DateTime, default=datetime.datetime.now )
     def __repr__(self):
-        return 'image: %d' % self.id
+        return 'image: %d' % self.image_uuid

@@ -19,6 +19,7 @@ contacts_users = db.Table('contacts_users',
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(255), unique=True)
+    contact_id = db.Column(db.Integer, db.ForeignKey('contact.id'))
     password = db.Column(db.String(255))
     active = db.Column(db.Boolean())
     confirmed_at = db.Column(db.DateTime())
@@ -30,7 +31,7 @@ class User(db.Model, UserMixin):
     current_login_ip = db.Column(db.String(255))
     login_count = db.Column(db.Integer)
     notes = db.relationship('Note', secondary=notes_users, lazy='joined')
-    contacts = db.relationship('Contact', secondary=contacts_users, lazy='joined')
+    contact = db.relationship('Contact')
     projects = db.relationship('Project', backref='client', lazy='joined')
     def __repr__(self):
         return 'User[email=%s]' % self.email
@@ -43,6 +44,8 @@ class Role(db.Model, RoleMixin):
         return self.name 
 
 
+
+
 class Contact(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     fullname = db.Column(db.String())
@@ -51,7 +54,7 @@ class Contact(db.Model):
     state = db.Column(db.String())
     zipcode = db.Column(db.String())
     created_at = db.Column(db.DateTime, default=datetime.datetime.now )
-    channels = db.relationship('ContactItem', lazy='joined')
+    items = db.relationship('ContactItem', lazy='joined')
     def __repr__(self):
         return "%s - %s" % (self.fullname , self.city )
 

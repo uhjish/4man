@@ -1,11 +1,11 @@
 // Declare app level module which depends on filters, and services
-var app = angular.module('manpower', ['ngResource', 'ngRoute', 'restangular','ui.bootstrap', 'ui.date', 'ngCookies', 'xeditable'])
+var app = angular.module('manpower', ['ngResource', 'ngRoute', 'restangular','ui.bootstrap', 'ui.date', 'ngCookies', 'xeditable', 'uuid4', 'ngScrollSpy'])
   .config(function ($routeProvider, RestangularProvider) {
     $routeProvider
-      .when('/app/', {
+      .when('/app', {
         templateUrl: 'views/home/home.html', 
         controller: 'HomeController'})
-      .otherwise({redirectTo: '/'});
+      .otherwise({redirectTo: '/app/'});
 
     // configure restangular
     //RestangularProvider.setBaseUrl('/api');
@@ -77,3 +77,19 @@ app.factory('$modalogin', ['$rootScope', '$modal', '$http', '$cookieStore', '$q'
 app.run(function(editableOptions) {
   editableOptions.theme = 'bs3';
 });
+
+// --------------- Confirmation ----------------------
+app.directive('ngConfirmClick', [
+function(){
+  return {
+    link: function (scope, element, attr) {
+      var msg = attr.ngConfirmClick || "Are you sure?";
+      var clickAction = attr.confirmedClick;
+      element.bind('click',function (event) {
+        if ( window.confirm(msg) ) {
+          scope.$apply(clickAction)
+        }
+      });
+    }
+  };
+}]);

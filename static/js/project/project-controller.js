@@ -1,54 +1,58 @@
 angular.module('manpower').
-  controller("ProjectController",function(Restangular,$scope, $filter, $http){
-  var resource = Restangular.all('api/project')
-  resource.getList().then(function(projects){
-    $scope.projects = projects;
-    $scope.edit(projects[0]);
-    $scope.editMode = false;
-  });
-  
-  $scope.statuses = [];
-  Restangular.all('api/project_status').getList().then(function(sts){
-    $scope.statuses = sts;
-  });
+  controller("ProjectController",function($q, Restangular,$scope, $filter, $http, $routeParams, $anchorScroll, $location){
 
-  $scope.showStatus = function() {
-      if($scope.statuses.length > 0) {
-            var selected = $filter('filter')($scope.statuses, {id: $scope.currentProject.status_id});
-            return selected.length  ? selected[0].status : 'Not set';
-          } else {
-                return "undefined"; //$scope.currentProject.status.status;
-          }
-    };
-  $scope.lineItems = [];
-  $scope.getLineItemsForProject = function(){
-    $scope.currentProject.getList('line_items').then(function(results){
-      $scope.lineItems = results;
-    });
-  };
-  $scope.edit = function(selProj){
-      $scope.currentProject = selProj;
-      $scope.getLineItemsForProject();
-  };
-  $scope.add = function() {
-    resource.post($scope.newproject).then(function(newResource){
-        $scope.projects.push(newResource);
+  $scope.statuses = [];
+  $scope.init = function(){
+    $scope.project_id = $routeParams.id;
+    console.log("project_id: " + $scope.project_id );
+    Restangular.one('api/project', $scope.project_id).get()
+    .then( function(result){
+      $scope.currentProject = result;
+      return $scope.currentProject.getList('line_items');
     })
-  };
-  $scope.saveProject = function() {
-    // $scope.user already updated!
-    return $http.post('/project', $scope.currentProject).error(function(err) {
-      if(err.field && err.msg) {
-        // err like {field: "name", msg: "Server-side error for this username!"} 
-        $scope.editableForm.$setError(err.field, err.msg);
-      } else { 
-        // unknown error
-        $scope.editableForm.$setError('name', 'Unknown error!');
-      }
+    .then(function(items){
+      $scope.lineItems = items;
     });
+
+    Restangular.all('api/project_status').getList().then(function(sts){
+      $scope.statuses = sts;
+    });
+
+  }
+
+  $scope.showProjectStatus = function() {
+    if($scope.statuses.length > 0) {
+      var selected = $filter('filter')($scope.statuses, {id: $scope.currentProject.status_id});
+      return selected.length  ? selected[0].status : 'Not set';
+    } else {
+      return "undefined"; //$scope.currentProject.status.status;
+    }
   };
-  $scope.alert = function( resp ){
-    $scope.edit(resp);
-    $scope.editMode = true;
+
+  //update the fields on the backend
+  $scope.saveProject = function() {
+    var putObj = { "shortname": $scope.currentProject.shortname, 
+      "desc" : $scope.currentProject.desc,
+      "status_id" : $scope.currentProject.status_id
+    };
+    return $scope.currentProject.customPUT(putObj)
   };
+
+  $scope.gotoAnchor = function(x) {
+    var newHash = 'anchor' + x;
+    if ($location.hash() !== newHash) {
+      // set the $location.hash to `newHash` and
+      // $anchorScroll will automatically scroll to it
+      $location.hash('anchor' + x);
+    } else {
+      // call $anchorScroll() explicitly,
+      // since $location.hash hasn't changed
+      $anchorScroll();
+    }
+  };
+
+
+
+  $scope.init();
+
 });

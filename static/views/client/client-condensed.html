@@ -1,0 +1,58 @@
+
+<div class="panel panel-default">
+    <div class="panel-heading" style="background-color:#ddd;">
+      <div class="row clearfix">
+        <div class="col-md-8 col-sm-8 column">
+          Client
+        </div>
+        <div class="col-md-4 col-sm-4 column" align="right">
+          <div class="buttons">
+            <!-- button to show form -->
+            <a type="button" class="btn btn-default btn-xs" href="#/client/{{currentUser.id}}">
+              Details
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body row">
+      <div class="col-md-6 col-sm-6 column">
+        <div>
+          <span title="name"> 
+            {{currentContact.fullname || name}}
+          </span>
+        </div>
+        <div>
+          <span title="street address">
+            {{currentContact.street || 'no description'}}
+          </span>
+        </div>
+        <div>
+          <span title="city">
+            {{currentContact.city || 'no description'}}
+          </span>
+          <span title="state">
+            {{currentContact.state || 'no description'}}
+          </span>
+          <span title="zipcode">
+            {{currentContact.zipcode || 'no description'}}
+          </span>
+        </div>
+      </div>
+
+
+      <div class="col-md-6 col-sm-6 column">
+        <div>
+          <span title="UserID">
+            {{currentUser.email || user_id}}
+          <span>
+        </div>
+        <div ng-repeat="chan in currentContact.items">
+          <span title="{{chan.label}}">
+            {{chan.identifier || 'no description'}}
+          </span>
+        </div>
+      </div>
+
+    </div>
+</div>

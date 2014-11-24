@@ -1,0 +1,100 @@
+
+<div class="col col-md-12 col-sm-12">
+  <fieldset>
+    <div class="row">
+        <!-- Form Name -->
+        <legend>User Profile: {{currentContact.fullname}}</legend>
+    </div>
+    <!-- Text input-->
+    <div class="form-group row row">
+      <label class="col-md-2 control-label" for="Name">Name</label>  
+      <div class="col-md-6"> 
+        <a href="#" editable-text="currentContact.fullname" onbeforesave="updateClientName($data)">
+          {{currentContact.fullname}}
+        </a>
+      </div>
+    </div>
+
+    <!-- Text input-->
+    <div class="form-group row">
+      <label class="col-md-2 control-label" for="userid">Email Address</label>
+      <div class="col-md-6">
+        <a href="#" editable-text="currentUser.email" onbeforesave="updateClientLogin($data)">
+          {{currentUser.email}}
+        </a>
+      </div>
+    </div>
+
+    <!-- Password input
+    <div class="form-group row">
+      <label class="col-md-2 control-label" for="password1">Password</label>
+      <div class="col-md-6">
+        <a href="#">(click to change)</a>
+      </div>
+    </div>
+    -->
+    <!-- Textarea -->
+    <div class="form-group row">
+      <label class="col-md-2 control-label" for="mailing">Mailing Address</label>
+      <div class="col-md-6">
+        <a href="#" editable-textarea="currentContact.address" onbeforesave="validateAddress($data)">
+          {{ getFormattedAddress() }}
+        </a>
+      </div>
+    </div>
+
+    <form editable-form name="editClientForm" onaftersave="saveContactItems();">
+      <!-- Button Drop Down -->
+      <div class="form-group row">
+        <div class="col col-md-2 col-sm-2">
+          <div class="row">
+            <label class="col-md-2 control-label" for="buttondropdown">Contacts</label>
+          </div>
+        </div>
+        <div class=" col col-md-6 col-sm-6">
+          <div class="row">
+            <div class="buttons">
+              <!-- button to show map -->
+              <button type="button" class="btn btn-default btn-sm"  ng-show="!editClientForm.$visible" ng-click="addContactItem();editClientForm.$show();">
+                Add
+              </button>
+              <!-- button to show form -->
+              <button type="button" class="btn btn-warning btn-sm" ng-click="editClientForm.$show()" ng-show="!editClientForm.$visible">
+                Edit
+              </button>
+              <!-- buttons to submit / cancel form -->
+              <span ng-show="editClientForm.$visible">
+                <button type="submit" class="btn btn-primary btn-sm" ng-disabled="editClientForm.$waiting">
+                  Save
+                </button>
+                <button type="button" class="btn btn-warning btn-sm" ng-disabled="editClientForm.$waiting" ng-click="editClientForm.$cancel()">
+                  Cancel
+                </button>
+              </span>
+            </div>
+          </div>
+            <div class="row">
+            <br>
+            </div>
+            <div class="row" ng-repeat="item in currentContact.items">
+          
+              <div class="col-md-4">
+              <label class="control-label" href="#" editable-text="item.label" e-placeholder="channel" e-name="channel" e-form="editClientForm" e-typeahead="name for name in channels  | filter:$viewValue | limitTo:8" e-required>
+                  {{ item.label || 'empty' }}
+              </label>
+              </div>
+              <div class="col-md-4">
+              <span class="pre" editable-text="item.identifier" e-name="ident" e-required>
+                {{item.identifier || 'street address'}}
+              </span>
+              </div>
+              <button type="button" class="btn btn-danger btn-xs" ng-confirm-click="Delete contact item?" ng-click="deleteContactItem($index)"; ng-show="editClientForm.$visible">
+                DEL
+              </button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+  </fieldset>
+</div>

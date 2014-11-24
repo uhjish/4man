@@ -30,20 +30,27 @@
         <tr ng-show="custom">
           <td>
             <div>
-                <table class="table table-hover table-condensed table-striped">
-                  <tbody>
-                    <tr> 
-                      <td>Description: {{si.desc}}</td>
+              <table class="table table-hover table-condensed table-striped">
+                <tbody>
+                  <tr> 
+                    <td>Description: {{si.desc}}</td>
                     <tr>
                     </tr>
-                      <td>Updated At: {{si.updated_at}}</td>
-                    </tr>
-                  </tbody>
-                </table>
+                    <td>Updated At: {{si.updated_at}}</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
+</div>
+<div class="container">
+  <ul rn-carousel class="image">
+    <li ng-repeat="image in currentLineItem.images.">
+      <div class="layer">{{ image.url }}</div>
+    </li>
+  </ul>
 </div>
