@@ -1,588 +1,566 @@
 <html>
-<head>
-  <title>PowerHouse Home Improvement</title>
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
-<!--theme-style-->
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />	
-<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-<!--//theme-style-->
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!--fonts-->
-<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-<script src="lib/js/jquery.min.js"></script>
-<script src="lib/js/jquery.wmuSlider.min.js"></script>
-<!--//fonts-->
-<script type="text/javascript" src="lib/js/move-top.js"></script>
-<script type="text/javascript" src="lib/js/modernizr.custom.js"></script>
-<script type="text/javascript" src="lib/js/easing.js"></script>
-	<script type="text/javascript">
-			jQuery(document).ready(function($) {
-			$(".scroll").click(function(event){		
-			event.preventDefault();
-			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-			});
-		});
-	</script>
-</head>
-<body>
-	<!--header-->
-	<div class="header">
-		<div class="container">
-			<div class="header-matter">
-				<div class="logo-head">
-					<a href="#"><img class="img-responsive" src="images/logo-2.png" alt="" /></a>
-          <p>Home Improvements</p>
-				</div>
-				<div class="head-grid">
-					<div class="men grid-men  scroll" onclick="location.href='#services';" class="artical">
-						<a  href="#services" class="scroll">
-            <h6><i class="fa fa-gears fa-3x fa-inverse"></i></h6>
-            </a>
-            <h6>services</h6>
-					</div>
-					<div class="men">
-						<img class="img-responsive" src="images/tiled-img1.jpg" alt="" />
-					</div>
-					<div class="clearfix"> </div>
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="grid-header">
-				<div class="grid-tv grid-men  scroll" onclick="location.href='#residential';" class="artical"> 
-          <a  href="#residential" class="scroll">
-            <h6><i class="fa fa-home fa-3x fa-inverse"></i></h6>
-          </a>
-					<h6>residential</h6>
-				</div>
-				<div class="grid-tv tv-portfolio  scroll" onclick="location.href='#commercial';" class="artical"> 
-						<a  href="#commercial" class="scroll">
-            <h6><i class="fa fa-building fa-3x fa-inverse"></i></h6>
-            </a>
-					<h6>commercial</h6>
-				</div>
-				<div class="grid-tv"> 
-					<img class="img-responsive" src="images/tiled-img3.jpg" alt="" />
-				</div>
-				<div class="grid-tv"> 
-					<img class="img-responsive" class="img-responsive" src="images/tiled-img5.jpg" alt="" />
-				</div>
-				<div class="grid-tv tv-portfolio  scroll" onclick="location.href='#about';" class="artical"> 
-						<a  href="#about" class="scroll">
-            <h6><i class="fa fa-phone fa-3x fa-inverse"></i></h6>
-            </a>
-					<h6>contact</h6>
-				</div>
-				<div class="grid-tv"> 
-					<img class="img-responsive" src="images/tiled-img6.jpg" alt="" />
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="grid-head-contact">
-				<div class="grid-msg"> 
-					<img class="img-responsive" src="images/tiled-img4.jpg" alt="" />
-				</div>
-				<div class="grid-msg grid-men  scroll" onclick="location.href='#contact';" class="artical"> 
-						<a  href="#about" class="scroll">
-            <h6><i class="fa fa-info-circle fa-3x fa-inverse"></i></h6>
-            </a>
-					<h6>about</h6>
-				</div>
-				<div class="grid-msg msg-head"> 
-					<img class="img-responsive" src="images/tiled-img7.jpg" alt="" />
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-			<div class="up">
-				<a  href="#about" class="scroll"><img class="up-grid" src="images/up.png" alt="" /></a>
-			</div>
-		</div>
-	</div>
-	<div class="header-home">
-		<div class="container">
-			<div class="fixed-header">
-				<div class="logo">
-				</div>
-				<div class="top-nav">
-						<span class="menu"> </span>
-					<ul>
-						<li><a href="#home" class="scroll">home</a></li>
-						<li class="active"><a href="#about" class="scroll">about</a></li>
-						<li><a href="#services" class="scroll">services</a></li>
-						<li><a href="#residential" class="scroll">residential</a></li>
-						<li><a href="#commercial" class="scroll">commercial</a></li>
-						<li><a href="#contact" class="scroll">contact</a></li>
-						<li><a href="/app">login</a></li>
-					</ul>
-				<!-- script-nav -->
-			<script>
-			$("span.menu").click(function(){
-				$(".top-nav ul").slideToggle(500, function(){
-				});
-			});
-			</script>
-			<script type="text/javascript">
-					jQuery(document).ready(function($) {
-						$(".scroll").click(function(event){		
-							event.preventDefault();
-							$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-						});
-					});
-					</script>
-				<!-- //script-nav -->
-				</div>
-				<div class="clearfix"> </div>
-			</div>
-		</div>
-	</div>
-	<!--script-->
-		<script>
-			$(document).ready(function(){
-				$(".top-nav li a").click(function(){
-					$(this).parent().addClass("active");
-					$(this).parent().siblings().removeClass("active");
-				});
-			});
-		</script>
-			<!-- script-for sticky-nav -->
-		<script>
-		$(document).ready(function() {
-			 var navoffeset=$(".header-home").offset().top;
-			 $(window).scroll(function(){
-				var scrollpos=$(window).scrollTop(); 
-				if(scrollpos >=navoffeset){
-					$(".header-home").addClass("fixed");
-				}else{
-					$(".header-home").removeClass("fixed");
-				}
-			 });
-			 
-		});
-		</script>
-		<!-- /script-for sticky-nav -->
-	<!--//header-->
-	<!--content-->
-	<div class="content">
-		<div class="container">
-			<div class="about" id="about">
-				<h3>ab<span>out</span> us</h3>
-				<div class="about-grid">
-					<div class="col-md-7 about-left" align="center">
-						<img class="img-responsive" src="images/reno-clip.jpg" alt="" />
-						<p class="about-para">
-              We've been in this business for 23 years. We also give our customers retail home improvement at wholesale price. We work on all general contractors work so we can perform any and every job that you may need completed. We treat customers like family. We always want to make customers feel like they there opinions matter. We NEVER overcharge for work that we do.
-					</div>
-					<div class="col-md-5 about-right">
-						<h5>our skills</h5>	
-						<div class="green-about">
-							<div class="about-green">
-								<h6>concrete</h6>							
-								<div class="content-green">
-									<div style="width:70%;" >
-									</div>
-								 </div>
-							</div>	
-							<div class="about-green">
-								<h6>vinyl siding</h6>							
-								<div class="content-green">
-									<div style="width:50%;" >
-									</div>
-								 </div>
-							</div>	
-							<div class="about-green">
-								<h6>roofing</h6>							
-								<div class="content-green">
-									<div style="width:80%;" >
-									</div>
-								 </div>
-							</div>	
-							<div class="about-green">
-								<h6>flooring</h6>							
-								<div class="content-green">
-									<div style="width:75%;" >
-									</div>
-								 </div>
-							</div>	
-							<div class="about-green">
-								<h6>window installation</h6>							
-								<div class="content-green">
-									<div style="width:70%;" >
-									</div>
-								 </div>
-							</div>
-							<div class="about-green">
-								<h6>custom home remodels</h6>							
-								<div class="content-green">
-									<div style="width:70%;" >
-									</div>
-								 </div>
-							</div>
-						</div>
-						<a class="more" href="#">home</a>			
-					</div>
-					<div class="clearfix"> </div>
-				 </div>
-			</div>
-		</div>
-		<!--
-		<div class="team" id="team">
-			<div class="container">
-				<div class="team-head">
-					<h3>meet <span>our</span> team</h3>
-				</div>
-				<div class="team-bottom">
-					<div class="col-md-3 team-left left-team">
-						<img class="img-responsive team-one" src="images/4.jpg" alt=""/>
-						<h6>Daniel Moore</h6>
-						<p>Designer</p>
-					</div>
-					<div class="col-md-3 team-left">
-						<img class="img-responsive team-one" src="images/3.jpg" alt=""/>
-						<h6>Daniel Moore</h6>
-						<p>Designer</p>
-					</div>
-					<div class="col-md-3 team-left left-team">
-						<img class="img-responsive team-one" src="images/2.jpg" alt=""/>
-						<h6>Daniel Moore</h6>
-						<p>Designer</p>
-					</div>
-					<div class="col-md-3 team-left left-team">
-						<img class="img-responsive team-one" src="images/1.jpg" alt=""/>
-						<h6>Daniel Moore</h6>
-						<p>Designer</p>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
-			</div>
-		</div>
-		-->
-		<div class="team">
-			<div class="container">
-				<div class="us-top">
-					<h3>some <span>facts a</span>bout us</h3>
-					<p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great.</p>
-				</div>
-				<div class="us-bottom">
-					<div class="col-md-3 sale">
-						<h5>MD</h5>
-						<p>licensed</p>					
-					</div>
-					<div class="col-md-3 sale">
-						<h5>921</h5>
-						<p>produt sales</p>					
-					</div>
-					<div class="col-md-3 sale">
-            <h5><i class="fa fa-shield"></i></h5>
-						<p>bonded & insured</p>					
-					</div>
-					<div class="col-md-3 sale">
-						<h5>100</h5>
-						<p>redbeacon score</p>					
-					</div>
-					<div class="clearfix"> </div>
-				</div>
-			</div>
-		</div>
-		<!---->
-		<div class="services" id="services">
-			<div class="container">
-				<h3>our <span>ser</span>ivces</h3>
-				<div class="service-grid">
-					<div class="col-md-6 grid-left-services">
-					<a class="phone" href="#"><img class="phone-grid" src="images/phone.png" alt=""/></a>
-					<div class="serivce-left"> 
-						<h5>unique flat design</h5>	
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>				
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="col-md-6 grid-left-services">
-					<a class="phone" href="#"><img class="phone-grid" src="images/lo.png" alt=""/></a>
-					<div class="serivce-left"> 
-						<h5>unique flat design</h5>	
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>				
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
-				<div class="service-grid">
-					<div class="col-md-6 grid-left-services">
-					<a class="phone" href="#"><img class="phone-grid" src="images/ju.png" alt=""/></a>
-					<div class="serivce-left"> 
-						<h5>unique flat design</h5>	
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>				
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="col-md-6 grid-left-services">
-					<a class="phone" href="#"><img class="phone-grid" src="images/se.png" alt=""/></a>
-					<div class="serivce-left"> 
-						<h5>unique flat design</h5>	
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>				
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
-				<div class="service-grid">
-					<div class="col-md-6 grid-left-services">
-					<a class="phone" href="#"><img class="phone-grid" src="images/bo.png" alt=""/></a>
-					<div class="serivce-left"> 
-						<h5>unique flat design</h5>	
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>				
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="col-md-6 grid-left-services">
-					<a class="phone" href="#"><img class="phone-grid" src="images/cl.png" alt=""/></a>
-					<div class="serivce-left"> 
-						<h5>unique flat design</h5>	
-						<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>				
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="clearfix"> </div>
-				</div>
-			</div>
-		</div>
-		<!---->
-		<div class="portifolio" id="residential">
-			<div class="container">
-				<div class="portfolio-top">
-					<h3>resi<span>dent</span>ial</h3>
-					<p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder human happiness.</p>
-				</div>
-		<div class="example">
-			<div  class="portfolio-item">
-				<div class=" col-md-3 item">
-					<a href="#">
-						<img class="img-responsive grid-item" src="images/pi.jpg" alt=""/>
-						<div class=" port-head ">
-							<h4>Lorem Ipsum</h4>
-							<p>But I must explain to you how all this mistaken idea.</p>						
-						</div>
-						</a>
-				</div>
-				<div class=" col-md-3 item">
-					<a href="#">
-						<img class="img-responsive grid-item" src="images/pi-1.jpg" alt=""/>
-						<div class=" port-head ">
-							<h4>Lorem Ipsum</h4>
-							<p>But I must explain to you how all this mistaken idea.</p>						
-						</div>
-					</a>
-				</div>
-        <div class=" col-md-3 item">
-					<a href="#">
-						<img class="img-responsive grid-item" src="images/pi-2.jpg" alt=""/>
-						<div class=" port-head ">
-							<h4>Lorem Ipsum</h4>
-							<p>But I must explain to you how all this mistaken idea.</p>						
-						</div>
-					</a>
-				</div>
-				<div class=" col-md-3 item">
-					<a href="#">
-						<img class="img-responsive grid-item" src="images/pi-3.jpg" alt=""/>
-						<div class=" port-head ">
-							<h4>Lorem Ipsum</h4>
-							<p>But I must explain to you how all this mistaken idea.</p>						
-						</div>
-					</a>
-				</div>
-				<div class="clearfix"> </div>
+  <head>
+    <title>PowerHouse Home Improvement</title>
+    <link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all"/>
+    <!--theme-style-->
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />	
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <!--//theme-style-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!--fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <script src="lib/js/jquery.min.js"></script>
+    <script src="lib/js/jquery.wmuSlider.min.js"></script>
+    <!--//fonts-->
+    <script type="text/javascript" src="lib/js/move-top.js"></script>
+    <script type="text/javascript" src="lib/js/easing.js"></script>
+    <script type="text/javascript">
+      jQuery(document).ready(function($) {
+          $(".scroll").click(function(event){		
+            event.preventDefault();
+            $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+            });
+          });
+    </script>
+  </head>
+  <body>
+    <!--header-->
+    <div class="header">
+      <div class="container">
+        <div class="header-matter">
+          <div class="logo-head">
+            <a href="#"><img class="img-responsive" src="images/logo-2.png" alt="" /></a>
+            <p>Home Improvements</p>
+          </div>
+          <div class="head-grid">
+            <div class="men grid-men  scroll" onclick="location.href='#services';" class="artical">
+              <a  href="#services" class="scroll">
+                <h6><i class="fa fa-gears fa-3x fa-inverse"></i></h6>
+              </a>
+              <h6>services</h6>
+            </div>
+            <div class="men">
+              <img class="img-responsive" src="images/tiled-img1.jpg" alt="" />
+            </div>
+            <div class="clearfix"> </div>
+          </div>
+          <div class="clearfix"> </div>
         </div>
+        <div class="grid-header">
+          <div class="grid-tv grid-men  scroll" onclick="location.href='#residential';" class="artical"> 
+            <a  href="#residential" class="scroll">
+              <h6><i class="fa fa-home fa-3x fa-inverse"></i></h6>
+            </a>
+            <h6>residential</h6>
+          </div>
+          <div class="grid-tv tv-portfolio  scroll" onclick="location.href='#commercial';" class="artical"> 
+            <a  href="#commercial" class="scroll">
+              <h6><i class="fa fa-building fa-3x fa-inverse"></i></h6>
+            </a>
+            <h6>commercial</h6>
+          </div>
+          <div class="grid-tv"> 
+            <img class="img-responsive" src="images/tiled-img3.jpg" alt="" />
+          </div>
+          <div class="grid-tv"> 
+            <img class="img-responsive" class="img-responsive" src="images/tiled-img5.jpg" alt="" />
+          </div>
+          <div class="grid-tv tv-portfolio  scroll" onclick="location.href='#about';" class="artical"> 
+            <a  href="#about" class="scroll">
+              <h6><i class="fa fa-phone fa-3x fa-inverse"></i></h6>
+            </a>
+            <h6>contact</h6>
+          </div>
+          <div class="grid-tv"> 
+            <img class="img-responsive" src="images/tiled-img6.jpg" alt="" />
+          </div>
+          <div class="clearfix"> </div>
+        </div>
+        <div class="grid-head-contact">
+          <div class="grid-msg"> 
+            <img class="img-responsive" src="images/tiled-img4.jpg" alt="" />
+          </div>
+          <div class="grid-msg grid-men  scroll" onclick="location.href='#contact';" class="artical"> 
+            <a  href="#about" class="scroll">
+              <h6><i class="fa fa-info-circle fa-3x fa-inverse"></i></h6>
+            </a>
+            <h6>about</h6>
+          </div>
+          <div class="grid-msg msg-head"> 
+            <img class="img-responsive" src="images/tiled-img7.jpg" alt="" />
+          </div>
+          <div class="clearfix"> </div>
+        </div>
+        <div class="up">
+          <a  href="#about" class="scroll"><img class="up-grid" src="images/up.png" alt="" /></a>
         </div>
       </div>
+    </div>
+    <div class="header-home">
+      <div class="container">
+        <div class="fixed-header">
+          <div class="logo">
+          </div>
+          <div class="top-nav">
+            <span class="menu"> </span>
+            <ul>
+              <li><a href="#home" class="scroll">home</a></li>
+              <li class="active"><a href="#about" class="scroll">about</a></li>
+              <li><a href="#services" class="scroll">services</a></li>
+              <li><a href="#residential" class="scroll">residential</a></li>
+              <li><a href="#commercial" class="scroll">commercial</a></li>
+              <li><a href="#contact" class="scroll">contact</a></li>
+              <li><a href="/app">login</a></li>
+            </ul>
+            <!-- script-nav -->
+            <script>
+              $("span.menu").click(function(){
+                  $(".top-nav ul").slideToggle(500, function(){
+                    });
+                  });
+            </script>
+            <script type="text/javascript">
+              jQuery(document).ready(function($) {
+                  $(".scroll").click(function(event){		
+                    event.preventDefault();
+                    $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+                    });
+                  });
+            </script>
+            <!-- //script-nav -->
+          </div>
+          <div class="clearfix"> </div>
+        </div>
       </div>
-        
-		<div class="portifolio" id="commercial">
-			<div class="container">
-				<div class="portfolio-top">
-					<h3>com<span>merc</span>ial</h3>
-					<p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder human happiness.</p>
-				</div>
-		<div class="example">
-			<div  class="portfolio-item">
-				</div>
-				<div  class="portfolio-item">
-				<div class=" col-md-3 item">
-					<a href="#">
-						<img class="img-responsive grid-item" src="images/pi-4.jpg" alt=""/>
-						<div class=" port-head ">
-							<h4>Lorem Ipsum</h4>
-							<p>But I must explain to you how all this mistaken idea.</p>						
-						</div>
-						</a>
-				</div>
-				<div class=" col-md-3 item">
-					<a href="#">
-						<img class="img-responsive grid-item" src="images/pi-5.jpg" alt=""/>
-						<div class=" port-head ">
-							<h4>Lorem Ipsum</h4>
-							<p>But I must explain to you how all this mistaken idea.</p>						
-						</div>
-					</a>
-				</div>
-				<div class=" col-md-3 item">
-					<a href="#">
-						<img class="img-responsive grid-item" src="images/pi-6.jpg" alt=""/>
-						<div class=" port-head ">
-							<h4>Lorem Ipsum</h4>
-							<p>But I must explain to you how all this mistaken idea.</p>						
-						</div>
-					</a>
-				</div>
-				<div class=" col-md-3 item">
-					<a href="#">
-						<img class="img-responsive grid-item" src="images/pi-7.jpg" alt=""/>
-						<div class=" port-head ">
-							<h4>Lorem Ipsum</h4>
-							<p>But I must explain to you how all this mistaken idea.</p>						
-						</div>
-					</a>
-				</div>
-				<div class="clearfix"> </div>
-				</div>
-				</div>
-					<a class="more" href="#">home</a>	
-			</div>
-		</div>
+    </div>
+    <!--script-->
+    <script>
+      $(document).ready(function(){
+          $(".top-nav li a").click(function(){
+            $(this).parent().addClass("active");
+            $(this).parent().siblings().removeClass("active");
+            });
+          });
+    </script>
+    <!-- script-for sticky-nav -->
+    <script>
+      $(document).ready(function() {
+          var navoffeset=$(".header-home").offset().top;
+          $(window).scroll(function(){
+            var scrollpos=$(window).scrollTop(); 
+            if(scrollpos >=navoffeset){
+            $(".header-home").addClass("fixed");
+            }else{
+            $(".header-home").removeClass("fixed");
+            }
+            });
+
+          });
+    </script>
+    <!-- /script-for sticky-nav -->
+    <!--//header-->
+    <!--content-->
+    <div class="content">
+      <div class="container">
+        <div class="about" id="about">
+          <h3>ab<span>out</span> us</h3>
+          <div class="about-grid">
+            <div class="col-md-7 about-left" align="center">
+              <img class="img-responsive" src="images/reno-clip.jpg" alt="" />
+              <p class="about-para">
+                We've been in this business for 23 years. We also give our customers retail home improvement at wholesale price. We work on all general contractors work so we can perform any and every job that you may need completed. We treat customers like family. We always want to make customers feel like they there opinions matter. We NEVER overcharge for work that we do.
+              </div>
+              <div class="col-md-5 about-right">
+                <h5>our skills</h5>	
+                <div class="green-about">
+                  <div class="about-green">
+                    <h6>concrete</h6>							
+                    <div class="content-green">
+                      <div style="width:70%;" >
+                      </div>
+                    </div>
+                  </div>	
+                  <div class="about-green">
+                    <h6>vinyl siding</h6>							
+                    <div class="content-green">
+                      <div style="width:50%;" >
+                      </div>
+                    </div>
+                  </div>	
+                  <div class="about-green">
+                    <h6>roofing</h6>							
+                    <div class="content-green">
+                      <div style="width:80%;" >
+                      </div>
+                    </div>
+                  </div>	
+                  <div class="about-green">
+                    <h6>flooring</h6>							
+                    <div class="content-green">
+                      <div style="width:75%;" >
+                      </div>
+                    </div>
+                  </div>	
+                  <div class="about-green">
+                    <h6>window installation</h6>							
+                    <div class="content-green">
+                      <div style="width:70%;" >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="about-green">
+                    <h6>custom home remodels</h6>							
+                    <div class="content-green">
+                      <div style="width:70%;" >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <a class="more" href="#">home</a>			
+              </div>
+              <div class="clearfix"> </div>
+            </div>
+          </div>
+        </div>
+        <!--
+    <div class="team" id="team">
+      <div class="container">
+        <div class="team-head">
+          <h3>meet <span>our</span> team</h3>
+        </div>
+        <div class="team-bottom">
+          <div class="col-md-3 team-left left-team">
+            <img class="img-responsive team-one" src="images/4.jpg" alt=""/>
+            <h6>Daniel Moore</h6>
+            <p>Designer</p>
+          </div>
+          <div class="col-md-3 team-left">
+            <img class="img-responsive team-one" src="images/3.jpg" alt=""/>
+            <h6>Daniel Moore</h6>
+            <p>Designer</p>
+          </div>
+          <div class="col-md-3 team-left left-team">
+            <img class="img-responsive team-one" src="images/2.jpg" alt=""/>
+            <h6>Daniel Moore</h6>
+            <p>Designer</p>
+          </div>
+          <div class="col-md-3 team-left left-team">
+            <img class="img-responsive team-one" src="images/1.jpg" alt=""/>
+            <h6>Daniel Moore</h6>
+            <p>Designer</p>
+          </div>
+          <div class="clearfix"> </div>
+        </div>
+      </div>
+    </div>
+    -->
+        <div class="team">
+          <div class="container">
+            <div class="us-top">
+              <h3>some <span>facts a</span>bout us</h3>
+              <p>Collaboratively administrate empowered markets via plug-and-play networks. Dynamically procrastinate B2C users after installed base benefits. Dramatically visualize customer directed convergence without revolutionary ROI.</p>
+
+            </div>
+            <div class="us-bottom">
+              <div class="col-md-3 sale">
+                <h5>MD</h5>
+                <p>licensed</p>					
+              </div>
+              <div class="col-md-3 sale">
+                <h5>921</h5>
+                <p>produt sales</p>					
+              </div>
+              <div class="col-md-3 sale">
+                <h5><i class="fa fa-shield"></i></h5>
+                <p>bonded & insured</p>					
+              </div>
+              <div class="col-md-3 sale">
+                <h5>100</h5>
+                <p>redbeacon score</p>					
+              </div>
+              <div class="clearfix"> </div>
+            </div>
+          </div>
+        </div>
+        <!---->
+        <div class="services" id="services">
+          <div class="container">
+            <h3>our <span>ser</span>ivces</h3>
+            <div class="service-grid">
+              <div class="col-md-6 grid-left-services">
+                <a class="phone" href="#"><img class="phone-grid" src="images/phone.png" alt=""/></a>
+                <div class="serivce-left"> 
+                  <h5>unique flat design</h5>	
+                  <p>Efficiently unleash cross-media information</p>
+                </div>
+                <div class="clearfix"> </div>
+              </div>
+              <div class="col-md-6 grid-left-services">
+                <a class="phone" href="#"><img class="phone-grid" src="images/lo.png" alt=""/></a>
+                <div class="serivce-left"> 
+                  <h5>unique flat design</h5>	
+                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>				
+                </div>
+                <div class="clearfix"> </div>
+              </div>
+              <div class="clearfix"> </div>
+            </div>
+            <div class="service-grid">
+              <div class="col-md-6 grid-left-services">
+                <a class="phone" href="#"><img class="phone-grid" src="images/ju.png" alt=""/></a>
+                <div class="serivce-left"> 
+                  <h5>unique flat design</h5>	
+                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>				
+                </div>
+                <div class="clearfix"> </div>
+              </div>
+              <div class="col-md-6 grid-left-services">
+                <a class="phone" href="#"><img class="phone-grid" src="images/se.png" alt=""/></a>
+                <div class="serivce-left"> 
+                  <h5>unique flat design</h5>	
+                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>				
+                </div>
+                <div class="clearfix"> </div>
+              </div>
+              <div class="clearfix"> </div>
+            </div>
+            <div class="service-grid">
+              <div class="col-md-6 grid-left-services">
+                <a class="phone" href="#"><img class="phone-grid" src="images/bo.png" alt=""/></a>
+                <div class="serivce-left"> 
+                  <h5>unique flat design</h5>	
+                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>				
+                </div>
+                <div class="clearfix"> </div>
+              </div>
+              <div class="col-md-6 grid-left-services">
+                <a class="phone" href="#"><img class="phone-grid" src="images/cl.png" alt=""/></a>
+                <div class="serivce-left"> 
+                  <h5>unique flat design</h5>	
+                  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>				
+                </div>
+                <div class="clearfix"> </div>
+              </div>
+              <div class="clearfix"> </div>
+            </div>
+          </div>
+        </div>
+        <!---->
+        <div class="portifolio" id="residential">
+          <div class="container">
+            <div class="portfolio-top">
+              <h3>resi<span>dent</span>ial</h3>
+              <p>Completely synergize resource sucking relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas. Dynamically innovate resource-leveling customer service for state of the art customer service.</p>
+            </div>
+            <div class="example">
+              <div  class="portfolio-item">
+                <div class=" col-md-3 item">
+                  <a href="#">
+                    <img class="img-responsive grid-item" src="images/pi.jpg" alt=""/>
+                    <div class=" port-head ">
+                      <h4>Lorem Ipsum</h4>
+                      <p>But I must explain to you how all this mistaken idea.</p>						
+                    </div>
+                  </a>
+                </div>
+                <div class=" col-md-3 item">
+                  <a href="#">
+                    <img class="img-responsive grid-item" src="images/pi-1.jpg" alt=""/>
+                    <div class=" port-head ">
+                      <h4>Lorem Ipsum</h4>
+                      <p>But I must explain to you how all this mistaken idea.</p>						
+                    </div>
+                  </a>
+                </div>
+                <div class=" col-md-3 item">
+                  <a href="#">
+                    <img class="img-responsive grid-item" src="images/pi-2.jpg" alt=""/>
+                    <div class=" port-head ">
+                      <h4>Lorem Ipsum</h4>
+                      <p>But I must explain to you how all this mistaken idea.</p>						
+                    </div>
+                  </a>
+                </div>
+                <div class=" col-md-3 item">
+                  <a href="#">
+                    <img class="img-responsive grid-item" src="images/pi-3.jpg" alt=""/>
+                    <div class=" port-head ">
+                      <h4>Lorem Ipsum</h4>
+                      <p>But I must explain to you how all this mistaken idea.</p>						
+                    </div>
+                  </a>
+                </div>
+                <div class="clearfix"> </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="portifolio" id="commercial">
+          <div class="container">
+            <div class="portfolio-top">
+              <h3>com<span>merc</span>ial</h3>
+              <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder human happiness.</p>
+            </div>
+            <div class="example">
+              <div  class="portfolio-item">
+              </div>
+              <div  class="portfolio-item">
+                <div class=" col-md-3 item">
+                  <a href="#">
+                    <img class="img-responsive grid-item" src="images/pi-4.jpg" alt=""/>
+                    <div class=" port-head ">
+                      <h4>Lorem Ipsum</h4>
+                      <p>But I must explain to you how all this mistaken idea.</p>						
+                    </div>
+                  </a>
+                </div>
+                <div class=" col-md-3 item">
+                  <a href="#">
+                    <img class="img-responsive grid-item" src="images/pi-5.jpg" alt=""/>
+                    <div class=" port-head ">
+                      <h4>Lorem Ipsum</h4>
+                      <p>But I must explain to you how all this mistaken idea.</p>						
+                    </div>
+                  </a>
+                </div>
+                <div class=" col-md-3 item">
+                  <a href="#">
+                    <img class="img-responsive grid-item" src="images/pi-6.jpg" alt=""/>
+                    <div class=" port-head ">
+                      <h4>Lorem Ipsum</h4>
+                      <p>But I must explain to you how all this mistaken idea.</p>						
+                    </div>
+                  </a>
+                </div>
+                <div class=" col-md-3 item">
+                  <a href="#">
+                    <img class="img-responsive grid-item" src="images/pi-7.jpg" alt=""/>
+                    <div class=" port-head ">
+                      <h4>Lorem Ipsum</h4>
+                      <p>But I must explain to you how all this mistaken idea.</p>						
+                    </div>
+                  </a>
+                </div>
+                <div class="clearfix"> </div>
+              </div>
+            </div>
+            <a class="more" href="#">home</a>	
+          </div>
+        </div>
 
 
 
-		<!--clients-->
-		<div class="clients">
-			<div class="container">
-				<div class="clients-top">
-					<h3>tes<span>timon</span>ials</h3>
-					<p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great.</p>
-				</div>
-					<div class="content-bottom">
-						<div class="wmuSlider example1">
-							   <div class="wmuSliderWrapper">
-								   <article style="position: absolute; width: 100%; opacity: 0;">
-								   	<div class="grid-matter-bottom">
-										<div class="col-md-5 bottom-men ">
-											<img class="img-responsive" src="images/buss.jpg" alt="" />
-										</div>
-										<div class="col-md-7 bottom-matter-left">
-											<span>johnthan elliot</span>
-											<p>"Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's."</p>
-										</div>
-										<div class="clearfix"> </div>
-										</div>
-								 	</article>
-								 	 <article style="position: absolute; width: 100%; opacity: 0;">
-								 	 	<div class="grid-matter-bottom">
-											<div class="col-md-5 bottom-men">
-												<img class="img-responsive" src="images/bus.jpg" alt="" />
-											</div>
-											<div class="col-md-7 bottom-matter-left">
-												<span>johnthan elliot</span>
-												<p>"Lorem Ipsum is simply dummy text of the printing and typesetting.Lorem Ipsum has been the industry's."</p>
-											</div>
-											<div class="clearfix"> </div>
-										</div>
-								 	</article>
-								 	 <article style="position: absolute; width: 100%; opacity: 0;">
-								 	 	<div class="grid-matter-bottom">
-											<div class="col-md-5 bottom-men">
-												<img class="img-responsive" src="images/bu.jpg" alt="" />
-											</div>
-											<div class="col-md-7 bottom-matter-left">
-												<span>johnthan elliot</span>
-												<p>"Lorem Ipsum is simply dummy text of the printing and typesetting.Lorem Ipsum has been the industry's."</p>
-											</div>
-											<div class="clearfix"> </div>
-										</div>
-								 	</article>
-								 </div>
-				                <ul class="wmuSliderPagination">
-				                	<li><a href="#" class="">0</a></li>
-				                	<li><a href="#" class="">1</a></li>
-				                	<li><a href="#" class="">2</a></li>
-				                </ul>
-				            </div>
-                  <script>
-				       			$('.example1').wmuSlider(touch: Modernizr.touch);         
-				   		     </script> 	           	         
-					</div>
-			</div>
-		</div>
-		<!---contant--->
-	<div  id="contact" class="contact">
-		<div class="map">
-			<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d117451.83412789257!2d72.4782171300925!3d23.083554293042766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1408175172215"></iframe>
-		
-		</div>
-		<div class="clearfix"> </div>
-		<div class="container">
-			<span class="drop"> </span>
-			<div class="contact-grid">
-				<p class="contact-para">you@hjkirj.com</p>
-				<p class="contact-number">[568-749-2545]</p>
-				<div class="content-grid-bottom">
-					<p>ADDRESS:</p>
-					<p>Aenean ut lacinia odio,sit</p>
-					<p>amet convallis arci.</p>
-				</div>
-				<ul class="social">
-				    <li class="facebook"><a href="#" class=""><span> </span></a></li>
-				    <li class="tin"><a href="#" class=""><span> </span></a></li>
-				    <li class="inline"><a href="#" class=""><span> </span></a></li>
-			 	</ul>
-			</div>
-		</div>
-		<div class="contact-us">
-			<div class="container">
-				<div class="us-contact">
-					<h3>con<span>tac</span>t us</h3>
-					<p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder human happiness.</p>
-				</div>
-				<form>
-					<div class="grid-contact-bootom">
-						<div class="col-md-6 contact-bottom">
-							<input type="text" value="your name" onfocus="this.value='';" onblur="if (this.value == '') {this.value = 'your name';}">
-							<input type="text" value="your email" onfocus="this.value='';" onblur="if (this.value == '') {this.value = 'your email';}">
-							<input type="text" value="your phone number" onfocus="this.value='';" onblur="if (this.value == '') {this.value = 'your phone number';}">
-						</div>
-						<div class="col-md-6 contact-bottom">
-							<textarea cols="70" rows="8" vaule="" onfocus="this.value='';" onblur="if (this.value == '') {this.value = 'message';}">message </textarea>
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<input type="submit" value="get in tech" >
-				</form>
-			</div>
-		</div>
-	</div>
-	</div>
-	<!--//content-->
-	<!--footer-->
-	<div class="footer">
-	<div class="container">
-		 <p class="class-footer">&copy; 2014 <a href="http://w3layouts.com/" target="_blank">RootedInsights</a> </p>
-		<div class="clearfix"> </div>
-	</div>
-					<script type="text/javascript">
-						$(document).ready(function() {
-							/*
-							var defaults = {
-					  			containerID: 'toTop', // fading element id
-								containerHoverID: 'toTopHover', // fading element hover id
-								scrollSpeed: 1200,
-								easingType: 'linear' 
-					 		};
-							*/
-							
-							$().UItoTop({ easingType: 'easeOutQuart' });
-							
-						});
-					</script>
-				<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
-	</div>
-	<!--footer-->
-</body>
-</html>
+        <!--clients-->
+        <div class="clients">
+          <div class="container">
+            <div class="clients-top">
+              <h3>tes<span>timon</span>ials</h3>
+              <p>But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great.</p>
+            </div>
+            <div class="content-bottom">
+              <div class="wmuSlider">
+                <div class="wmuSliderWrapper">
+                  <article style="position: absolute; width: 100%; opacity: 0;">
+                    <div class="grid-matter-bottom">
+                      <div class="col-md-5 bottom-men ">
+                        <img class="img-responsive" src="images/buss.jpg" alt="" />
+                      </div>
+                      <div class="col-md-7 bottom-matter-left">
+                        <span>johnthan elliot</span>
+                        <p>"Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industry's."</p>
+                      </div>
+                      <div class="clearfix"> </div>
+                    </div>
+                  </article>
+                  <article style="position: absolute; width: 100%; opacity: 0;">
+                    <div class="grid-matter-bottom">
+                      <div class="col-md-5 bottom-men">
+                        <img class="img-responsive" src="images/bus.jpg" alt="" />
+                      </div>
+                      <div class="col-md-7 bottom-matter-left">
+                        <span>johnthan elliot</span>
+                        <p>"Lorem Ipsum is simply dummy text of the printing and typesetting.Lorem Ipsum has been the industry's."</p>
+                      </div>
+                      <div class="clearfix"> </div>
+                    </div>
+                  </article>
+                  <article style="position: absolute; width: 100%; opacity: 0;">
+                    <div class="grid-matter-bottom">
+                      <div class="col-md-5 bottom-men">
+                        <img class="img-responsive" src="images/bu.jpg" alt="" />
+                      </div>
+                      <div class="col-md-7 bottom-matter-left">
+                        <span>johnthan elliot</span>
+                        <p>"Lorem Ipsum is simply dummy text of the printing and typesetting.Lorem Ipsum has been the industry's."</p>
+                      </div>
+                      <div class="clearfix"> </div>
+                    </div>
+                  </article>
+                </div>
+              </div>
+              <script>
+                $('.wmuSlider').wmuSlider();         
+              </script> 	           	         
+            </div>
+          </div>
+        </div>
+        <!---contant--->
+        <div  id="contact" class="contact">
+          <div class="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d117451.83412789257!2d72.4782171300925!3d23.083554293042766!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1408175172215"></iframe>
+          </div>
+          <div class="clearfix"> </div>
+          <div class="container">
+            <span class="drop"> </span>
+            <div class="contact-grid">
+              <p class="contact-para">you@hjkirj.com</p>
+              <p class="contact-number">[568-749-2545]</p>
+              <div class="content-grid-bottom">
+                <p>ADDRESS:</p>
+                <p>Aenean ut lacinia odio,sit</p>
+                <p>amet convallis arci.</p>
+              </div>
+              <ul class="social">
+                <li class="facebook"><a href="#" class=""><span> </span></a></li>
+                <li class="tin"><a href="#" class=""><span> </span></a></li>
+                <li class="inline"><a href="#" class=""><span> </span></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="contact-us">
+            <div class="container">
+              <div class="us-contact">
+                <h3>con<span>tac</span>t us</h3>
+                <p>Phosfluorescently engage worldwide methodologies with web-enabled technology. Interactively coordinate proactive e-commerce via process-centric "outside the box" thinking.</p>
+              </div>
+              <form>
+                <div class="grid-contact-bootom">
+                  <div class="col-md-6 contact-bottom">
+                    <input type="text" value="your name" onfocus="this.value='';" onblur="if (this.value == '') {this.value = 'your name';}">
+                    <input type="text" value="your email" onfocus="this.value='';" onblur="if (this.value == '') {this.value = 'your email';}">
+                    <input type="text" value="your phone number" onfocus="this.value='';" onblur="if (this.value == '') {this.value = 'your phone number';}">
+                  </div>
+                  <div class="col-md-6 contact-bottom">
+                    <textarea cols="70" rows="8" vaule="" onfocus="this.value='';" onblur="if (this.value == '') {this.value = 'message';}">message </textarea>
+                  </div>
+                  <div class="clearfix"> </div>
+                </div>
+                <input type="submit" value="get in tech" >
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--//content-->
+      <!--footer-->
+      <div class="footer">
+        <div class="container">
+          <p class="class-footer">&copy; 2014 <a href="http://w3layouts.com/" target="_blank">RootedInsights</a> </p>
+          <div class="clearfix"> </div>
+        </div>
+      </div>
+      <!--footer-->
+    </body>
+  </html>
