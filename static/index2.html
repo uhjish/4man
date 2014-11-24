@@ -10,9 +10,11 @@
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!--fonts-->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-<!--//fonts-->
 <script src="lib/js/jquery.min.js"></script>
+<script src="lib/js/jquery.wmuSlider.min.js"></script>
+<!--//fonts-->
 <script type="text/javascript" src="lib/js/move-top.js"></script>
+<script type="text/javascript" src="lib/js/modernizr.custom.js"></script>
 <script type="text/javascript" src="lib/js/easing.js"></script>
 	<script type="text/javascript">
 			jQuery(document).ready(function($) {
@@ -503,9 +505,8 @@
 				                	<li><a href="#" class="">2</a></li>
 				                </ul>
 				            </div>
-				            <script src="lib/js/jquery.wmuSlider.js"></script> 
-							  <script>
-				       			$('.example1').wmuSlider();         
+                  <script>
+				       			$('.example1').wmuSlider(touch: Modernizr.touch);         
 				   		     </script> 	           	         
 					</div>
 			</div>
