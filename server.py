@@ -46,13 +46,13 @@ def load_user(payload):
 def home():
 	return app.send_static_file('index2.html')
 @app.route('/mypage')
-#@login_required
+@login_required
 def mypage():
         print >>sys.stderr, "ouch"
 	return app.send_static_file('example.html')
 
 @app.route('/app')
-#@login_required
+@login_required
 def apage():
         print >>sys.stderr, "ouch"
 	return app.send_static_file('app.html')
