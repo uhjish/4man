@@ -25,21 +25,15 @@ angular.module('manpower').controller('LineItemImageController', function ($scop
       $scope.getImages();
     });
   }
-
-  images = [
-    {
-    'url': 'http://upload.wikimedia.org/wikipedia/commons/8/87/Waynejunction0810b.JPG',
-    'caption': 'This image has dimensions 2272x1704 and the img element is scaled to fit inside the window. The left and right arrow keys are binded for navigation. The escape key for closing the modal is binded by AngularUI Bootstrap.'
-  },
-  {
-    'url': 'http://upload.wikimedia.org/wikipedia/commons/thumb/9/98/%27Grand_Canyon_with_Rainbow%27_by_Thomas_Moran%2C_1912.JPG/586px-%27Grand_Canyon_with_Rainbow%27_by_Thomas_Moran%2C_1912.JPG',
-    'caption': 'This image has dimensions 586x480.'
-  },
-  {
-    'url': 'http://upload.wikimedia.org/wikipedia/commons/8/82/%27Right_Shoulder%2C_Arm%2C_and_Hand%27_by_Thomas_Eakins.JPG',
-    'caption': 'This image has dimensions 975x3105.'
-  }];
-
+  $scope.images=[];
+  $scope.addSlide = function() {
+    var newWidth = 600 + $scope.images.length + 1;
+    $scope.images.push({
+      url: 'http://placekitten.com/' + newWidth + '/300',
+      caption: ['More','Extra','Lots of','Surplus'][$scope.images.length % 4] + ' ' +
+        ['Cats', 'Kittys', 'Felines', 'Cutes'][$scope.images.length % 4]
+    });
+  };
   $scope.getImages = function(){
     Restangular.one('getS3prefix').get()
     .then( function(res){
@@ -55,7 +49,10 @@ angular.module('manpower').controller('LineItemImageController', function ($scop
         img.caption = "blah";
       });
     });
-    $scope.images = images;
+    for (var i=0; i<4; i++) {
+      $scope.addSlide();
+    }
+
   }
 
   $scope.openLightboxModal = function (index) {
