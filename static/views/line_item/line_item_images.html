@@ -1,0 +1,7 @@
+<ul>
+  <li ng-repeat="image in images">
+    <a ng-click="openLightboxModal($index)">
+      <img ng-src="{{image.url}}" class="img-thumbnail" alt="" width=100 height=100>
+    </a>
+  </li>
+</ul>

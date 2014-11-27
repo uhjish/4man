@@ -47,31 +47,22 @@ class LineItem(db.Model):
     contractors = db.relationship('Contractor', secondary=li_contractor, backref='lineitems', lazy='joined') 
     images = db.relationship('SiteImage', backref='parentitem', lazy='joined')
     def __repr__(self):
-        return 'project: %d - %d' % (self.project_id, self.id )
+        return self.title
 
 class LineSubitem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     lineitem_id =  db.Column(db.Integer, db.ForeignKey('line_item.id'))
-    title = db.Column(db.String())
     desc= db.Column(db.String())
     is_active = db.Column(db.Boolean, default=True)
+    est_material = db.Column( db.Numeric )
+    est_labor = db.Column( db.Numeric )
+    act_material = db.Column( db.Numeric )
+    act_labor = db.Column( db.Numeric )
     updated_at = db.Column( db.DateTime, default=datetime.datetime.now )
     deleted_at = db.Column( db.DateTime, nullable=True) 
-    subitemcosts = db.relationship('LineSubitemCost', backref='parentsubitem', lazy='subquery')
     def __repr__(self):
-        return 'project: %d - %d.%d' % (self.parentitem.project_id, self.lineitem_id, self.id)
+        return self.desc
 
-class LineSubitemCost(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    linesubitem_id =  db.Column(db.Integer, db.ForeignKey('line_subitem.id'))
-    is_estimate = db.Column(db.Boolean)
-    material_cost = db.Column( db.Numeric )
-    labor_cost = db.Column( db.Numeric )
-    created_at = db.Column( db.DateTime, default=datetime.datetime.now )
-    deleted_at = db.Column( db.DateTime, nullable=True)
-    def __repr__(self):
-        return str(self.is_estimate) + " %s, %s" % (self.material_cost,self.labor_cost)
-    
 class SiteImage(db.Model):
     image_uuid = db.Column( db.String(), primary_key=True ) 
     #image_ext = db.Column( db.String(4) );

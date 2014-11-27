@@ -1,52 +1,65 @@
 
 <div>
-  <div class="table-responsive">
-    <table class="table table-hover  table-borded table-striped">
-      <thead class="levelOne">
-        <tr>
-          <th>subitem</th>
-          <th>mtl.est</th>
-          <th>lbr.est</th>
-          <th>mtl.act</th>
-          <th>lbr.act</th>
-        </tr>
-      </thead>
-      <tbody data-ng-repeat="si in subItems">
-        <tr >
-          <td width='60%' class="clickableRow" title="Click to toggle collapse" ng-click="custom=!custom" >{{si.title}}</td>
-          <td>{{si.costs.me}}</td>
-          <td>{{si.costs.le}}</td>
-          <td>{{si.costs.ma}}</td>
-          <td>{{si.costs.la}}</td>
-          <td>
-            <label class="btn btn-xs btn-success">
-              e
-            </label>
-            <label class="btn btn-xs btn-danger">
-              d
-            </label>
-          </td>
-        </tr>
-        <tr ng-show="custom">
-          <td>
-            <div>
-              <table class="table table-hover table-condensed table-striped">
-                <tbody>
-                  <tr> 
-                    <td>Description: {{si.desc}}</td>
-                    <tr>
-                    </tr>
-                    <td>Updated At: {{si.updated_at}}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<div>
+  <table class="table table-bordered table-hover table-condensed">
+    <tr style="font-weight: bold">
+      <td style="width:40%">Subitem</td>
+      <td style="width:10%">Material (Est)</td>
+      <td style="width:10%">Labor (Est)</td>
+      <td style="width:10%">Material (Act)</td>
+      <td style="width:10%">Labor (Act)</td>
+      <td style="width:20%">Edit</td>
+    </tr>
+    <tr ng-repeat="si in subItems">
+      <td>
+        <span editable-text="si.desc" e-name="desc" e-form="rowform" e-required>
+          {{ si.desc || 'empty' }}
+        </span>
+      </td>
+      <td>
+        <!-- editable status (select-local) -->
+        <span editable-text="si.est_material" e-name="est_material" e-form="rowform"> 
+          {{ si.est_material }}
+        </span>
+      </td>
+      <td>
+        <!-- editable status (select-local) -->
+        <span editable-text="si.est_labor" e-name="est_labor" e-form="rowform"> 
+          {{ si.est_labor }}
+        </span>
+      </td>
+      <td>
+        <!-- editable status (select-local) -->
+        <span editable-text="si.act_material" e-name="act_material" e-form="rowform"> 
+          {{ si.act_material }}
+        </span>
+      </td>
+      <td>
+        <!-- editable status (select-local) -->
+        <span editable-text="si.act_labor" e-name="act_labor" e-form="rowform"> 
+          {{ si.act_labor }}
+        </span>
+      </td>
+      <td style="white-space: nowrap">
+        <!-- form -->
+        <form editable-form name="rowform" onbeforesave="updateSubitem($data, $index)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == si">
+          <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+            save
+          </button>
+          <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+            cancel
+          </button>
+        </form>
+        <div class="buttons" ng-show="!rowform.$visible">
+          <button class="btn btn-primary" ng-click="rowform.$show()">edit</button>
+          <button class="btn btn-danger" ng-click="deleteSubitem($index)">del</button>
+        </div>  
+      </td>
+    </tr>
+  </table>
+  <button class="btn btn-default" ng-click="addSubitem()">Add Subitem</button>
 </div>
+  
 <div class="container">
   <ul rn-carousel class="image">
     <li ng-repeat="image in currentLineItem.images.">

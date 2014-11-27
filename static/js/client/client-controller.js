@@ -62,8 +62,10 @@ angular.module('manpower').
     postObj["contact_id"]= $scope.currentContact.id;
     postObj["label"]="default label";
     postObj["identifier"]="555-555-5555";
-    var newObj = Restangular.all('api/contact_item').post(postObj);
-    $scope.currentContact.items.push(newObj)
+    Restangular.all('api/contact_item').post(postObj)
+    .then( function(newObj){
+      $scope.currentContact.items.push(newObj);
+    });
   }
 
   $scope.saveContactItems = function(){

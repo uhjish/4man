@@ -82,50 +82,9 @@
     </div>
   </div>
 
-
-
-  <div class="panel panel-default" id="anchor2">
-    <div class="panel-heading" style="background-color:#ddd;">
-      <div class="row clearfix">
-        <div class="col-md-8 col-sm-8 column">
-          <h4 >
-            <span class="title" style="background-color:#ddd;">Line Items</span> 
-          </h4>
-        </div>
-        <div class="col-md-4 col-sm-4 column" align="right">
-          <button type="button" class="btn btn-primary">Add Line Item</button>
-        </div>
-      </div>
-    </div>
-    <div class="panel-body">
-      <accordion close-others=true>
-      <accordion-group ng-repeat="li in lineItems">
-      <accordion-heading>
-      <div class="panel panel-default">
-        <div class="col-md-6 col-sm-6 column">
-          {{li.title}}
-        </div> 
-        <div class="col-md-6 col-sm-6 column" align="right">
-          <label class="btn btn-xs btn-primary">
-            {{li.area.name}}
-          </label>
-          <label class="btn btn-xs btn-info">
-            {{li.phase.name}}
-          </label>
-          <label class="btn btn-xs btn-success">
-            {{li.category.name}}
-          </label>
-        </div> 
-      </div>
-      </accordion-heading>
-      {{li.desc}}
-      <div ng-controller="LineItemController" ng-init="init(li.id)" ng-include="'views/line_item/line_item.html'">
-      </div>
-      </accordion-group>
-      </accordion>
-    </div>
+  <div class="container" ng-controller="LineItemListController" ng-init="init(currentProject)" ng-include="'views/line_item/line_item-list.html'">
   </div>
-</div>
+
 </div>
   <div class="panel panel-default" id="anchor3">
     <div class="panel-heading" style="background-color:#ddd;">

@@ -44,12 +44,16 @@ def load_user(payload):
 # Views  ======================================================================
 @app.route('/')
 def home():
-	return app.send_static_file('index2.html')
+	return app.send_static_file('loader.html')
 @app.route('/mypage')
 @login_required
 def mypage():
         print >>sys.stderr, "ouch"
 	return app.send_static_file('example.html')
+
+@app.route('/getS3prefix')
+def getS3prefix():
+    return app.config['IMAGE_BUCKET'];
 
 @app.route('/app')
 @login_required
@@ -112,10 +116,6 @@ apimanager.create_api(LineSubitem,
 	methods=['GET', 'POST', 'DELETE', 'PUT'],
 #	preprocessors=dict(GET_SINGLE=[auth_func], GET_MANY=[auth_func]),
 )
-apimanager.create_api(LineSubitemCost,
-	methods=['GET', 'POST', 'DELETE', 'PUT'],
-#	preprocessors=dict(GET_SINGLE=[auth_func], GET_MANY=[auth_func]),
-)
 apimanager.create_api(Area,
 	methods=['GET', 'POST', 'DELETE', 'PUT'],
 #	preprocessors=dict(GET_SINGLE=[auth_func], GET_MANY=[auth_func]),
@@ -143,7 +143,6 @@ admin.add_view(AdminModelView(Property, db.session,category="Proj"))
 admin.add_view(AdminModelView(Project, db.session,category="Proj"))
 admin.add_view(AdminModelView(LineItem, db.session,category="Proj"))
 admin.add_view(AdminModelView(LineSubitem, db.session,category="Proj"))
-admin.add_view(AdminModelView(LineSubitemCost, db.session,category="Proj"))
 admin.add_view(AdminModelView(Contractor, db.session,category="Annotations"))
 admin.add_view(AdminModelView(Skill, db.session,category="Annotations"))
 admin.add_view(AdminModelView(ContractorSkill, db.session,category="Annotations"))

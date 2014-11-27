@@ -83,6 +83,16 @@ def init_models():
     db.session.add(li1)
     db.session.add(li2)
     db.session.add(li3)
-
     db.session.commit()
 
+    si1 = LineSubitem(desc="a subitem for a line item with inner details and costs", est_material=5000, est_labor=1000)
+    si2 = LineSubitem(desc="another subitem for a line item with inner details and costs", est_material=200, est_labor=1000)
+    si3 = LineSubitem(desc="still a subitem for a line item with inner details and costs", est_material=500, est_labor=500)
+    si4 = LineSubitem(desc="now and on with the subitem for a line item with inner details and costs", est_material=5000, est_labor=1000)
+    si5 = LineSubitem(desc="and on with the subitem for a line item with inner details and costs", est_material=5000, est_labor=1000)
+
+    db.session.add(si1)
+    db.session.add(si2)
+    db.session.add(si3)
+    db.session.add(si4)
+    db.session.add(si5)

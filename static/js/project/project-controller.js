@@ -10,9 +10,6 @@ angular.module('manpower').
       $scope.currentProject = result;
       return $scope.currentProject.getList('line_items');
     })
-    .then(function(items){
-      $scope.lineItems = items;
-    });
 
     Restangular.all('api/project_status').getList().then(function(sts){
       $scope.statuses = sts;

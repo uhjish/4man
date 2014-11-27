@@ -1,0 +1,166 @@
+
+<div class="panel panel-default" id="anchor2"> 
+
+  <div class="panel-heading" style="background-color:#ddd;">
+    <div class="row clearfix">
+      <div class="col-md-8 col-sm-8 column">
+        <h5 >
+          <span class="title" style="background-color:#ddd;">Line Items</span> 
+        </h5>
+      </div>
+      <div class="col-md-4 col-sm-4 column" align="right">
+        <button type="button" class="btn btn-primary" ng-click="addLineItem()">Add Line Item</button>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <accordion close-others=false>
+    <accordion-group ng-repeat="li in lineItems" is-open="li.open">
+    <accordion-heading>
+    <div class="panel panel-default">
+      <div class="col-md-6 col-sm-6 column">
+        <h4>{{li.title}}</h4>
+      </div> 
+      <div class="col-md-6 col-sm-6 column" align="right">
+        <label class="btn btn-xs btn-primary">
+          {{li.area.name}}
+        </label>
+        <label class="btn btn-xs btn-info">
+          {{li.phase.name}}
+        </label>
+        <label class="btn btn-xs btn-success">
+          {{li.category.name}}
+        </label>
+      </div> 
+    </div>
+    </accordion-heading>
+    <div class="row">
+      <div class="col col-md-7">
+        <strong>
+          Title
+        </strong>
+        <p>
+          <a href="#" editable-text="li.title" onbeforesave="updateLineItemTitle($data, $index)">
+            {{li.title}}
+          </a>
+        </p>
+        <strong>
+          Description
+        </strong>
+        <p align="justify"> 
+          <a href="#" editable-text="li.desc" onbeforesave="updateLineItemDesc($data, $index)">
+            {{li.desc}}
+          </a>
+        </p>
+        <br><br>
+      </div>
+      <div class="col col-md-5">
+        <table width="75%">
+          <col align="right">
+          <col align="left">
+          <tbody>
+            <tr>
+              <td>
+                <strong>
+                  Phase
+                </strong>
+              </td>
+              <td>
+                <a href="#" editable-select="li.phase.id"  e-ng-options="g.id as g.name for g in phases" onbeforesave="updateLineItemTrait($index, 'phase_id',$data)">
+                  {{ li.phase.name || 'not set' }}
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  Area
+                </strong>
+              </td>
+              <td>
+                <a href="#" editable-select="li.area.id"  e-ng-options="g.id as g.name for g in areas" onbeforesave="updateLineItemTrait($index, 'area_id',$data)">
+                  {{ li.area.name || 'not set' }}
+                </a>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <strong>
+                  Category
+                </strong>
+              </td>
+              <td>
+                <a href="#" editable-select="li.category.id"  e-ng-options="g.id as g.name for g in categories" onbeforesave="updateLineItemTrait($index, 'category_id',$data)">
+                  {{ li.category.name || 'not set' }}
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
+        <button type="button" class="btn btn-sm btn-warning" ng-click="deleteLineItem($index)">Delete Line Item</button>
+      </div>
+    </div>
+    <div >
+      <div>
+        <div class="col col-md-7">
+          <h5> Images </h5>
+          <div ng-controller="LineItemImageController" ng-init="init(li.id)" ng-include="'views/line_item/line_item_images.html'">
+          </div>
+        </div>
+        <div class="col col-md-5">
+          <h5>Line Item Costs</h5>
+          <table width="100%">
+            <thead>
+              <td width="40%" align="right">
+              </td>
+              <td width="30%" align="right">
+                <h5>Estimated</h5>
+              </td>
+              <td width="30%" align="right">
+                <h5>Actual</h5>
+              </td>
+            </thead>
+            <tbody>
+              <tr>
+                <td align="right">
+                  <h5>Material</h5>
+                </td>
+                <td align="right">
+                  <h5>
+                    {{ getLineItemCosts( li.id, "est_material") }} 
+                  </h5>
+                </td>
+                <td align="right">
+                  <h5>
+                    {{ getLineItemCosts( li.id, "act_material") }}
+                  </h5>
+                </td>
+              </tr>
+              <tr>
+                <td align="right">
+                  <h5>
+                    Labor
+                  </h5>
+                </td>
+                <td align="right">
+                  <h5>
+                    {{ getLineItemCosts( li.id, "est_labor") }} 
+                  </h5>
+                </td>
+                <td align="right">
+                  <h5>
+                    {{ getLineItemCosts( li.id, "act_labor") }}
+                  </h5>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div ng-controller="LineItemController" ng-init="init(li.id)" ng-include="'views/line_item/line_item.html'">
+      </div>
+      </accordion-group>
+      </accordion>
+    </div>
+  </div>
