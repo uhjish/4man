@@ -1,5 +1,5 @@
 // Declare app level module which depends on filters, and services
-var app = angular.module('manpower', ['ngResource', 'ngRoute', 'restangular','ui.bootstrap', 'ui.date', 'ngCookies', 'xeditable', 'uuid4', 'ngScrollSpy', 'bootstrapLightbox', 'angularFileUpload'])
+var app = angular.module('manpower', ['ngResource', 'ngRoute', 'restangular','ui.bootstrap', 'ui.date', 'ngCookies', 'xeditable', 'uuid4', 'ngScrollSpy', 'bootstrapLightbox', 'angularFileUpload', 'wu.masonry'])
   .config(function ($routeProvider, RestangularProvider) {
     $routeProvider
       .when('/app', {
@@ -74,8 +74,10 @@ app.factory('$modalogin', ['$rootScope', '$modal', '$http', '$cookieStore', '$q'
 
 }]);
 
-app.run(function(editableOptions) {
+app.run(function(editableOptions, editableThemes) {
   editableOptions.theme = 'bs3';
+  editableThemes.bs3.inputClass = 'input-sm';
+  editableThemes.bs3.buttonsClass = 'btn-sm';
 });
 
 // --------------- Confirmation ----------------------

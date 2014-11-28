@@ -1,0 +1,30 @@
+<div class="panel panel-default" id="anchor3">
+  <div class="panel-heading" style="background-color:#ddd;">
+    <div class="row clearfix">
+      <div class="col-md-8 col-sm-8 column" ng-model="collapseProjectImages" ng-click="collapseProjectImages=!collapseProjectImages">
+        <h4 >
+          <span class="title" style="background-color:#ddd;">Images</span> 
+        </h4>
+      </div>
+      <div class="col-md-4 col-sm-4 column" align="right">
+        <button type="button" class="btn btn-primary">Add Image</button>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body" ng-hide="collapseProjectImages">
+    <div masonry column-width=250 masonry-options="{gutter:10}">
+      <div class="masonry-brick" ng-repeat="brick in images">
+        <img ng-src="{{ brick.url }}" alt="{{ brick.caption }}" width="250px">
+        <div>
+          <strong>Date:</strong>
+          {{ brick.caption }}<br>
+          <span>
+            <strong>li-></strong> 
+            <a href="javascript:;" editable-select="brick.lineitem_id"  e-ng-options="g.id as g.title for g in lineitems" onbeforesave="updateImageLineItem($index, $data)">
+              {{ brick.lineitem_id || 'not set' }}
+            </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

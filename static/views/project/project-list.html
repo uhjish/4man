@@ -3,17 +3,22 @@
   <div class="table-responsive">
     <table class="table table-striped table-hover">
       <tbody>
-        <tr ng-repeat="project in projects" ng-click="viewProject(project.id);">
+        <tr ng-repeat="project in projects">
           <td>
+            <div ng-click="viewProject(project.id);">
             <h4>{{project.shortname}}</h4>
             <b>client:</b>{{project.client.email}}<br>
             <b>status:</b>{{project.status.status}}<br>
-          </td><td>
+            </div>
+            <div>
+              <button type="button" class="btn btn-sm btn-primary" ng-file-select="onFileSelect($files, project.id)">Quick Upload</button>
+            </div>
+          </td><td ng-click="viewProject(project.id);">
             <b>address:</b><br>
             {{project.property.street}}<br>{{project.property.city}},{{project.property.state}} {{project.property.zipcode}}<br> 
           </td><td><b>description</b><br>{{project.desc}}
           </td>
-          <td align=right>
+          <td align="right" ng-click="viewProject(project.id);">
             <img src="img/generic-house.jpeg" height=150/>
           </td>
         </tr>

@@ -1,19 +1,19 @@
 
 <div class="panel panel-default" id="anchor2"> 
 
-  <div class="panel-heading" style="background-color:#ddd;">
+  <div class="panel-heading" style="background-color:#ddd;" ng-model="collapseLineItems" ng-click="collapseLineItems=!collapseLineItems">
     <div class="row clearfix">
       <div class="col-md-8 col-sm-8 column">
-        <h5 >
+          <h4>
           <span class="title" style="background-color:#ddd;">Line Items</span> 
-        </h5>
+        </h4>
       </div>
       <div class="col-md-4 col-sm-4 column" align="right">
         <button type="button" class="btn btn-primary" ng-click="addLineItem()">Add Line Item</button>
       </div>
     </div>
   </div>
-  <div class="panel-body">
+  <div class="panel-body" ng-hide="collapseLineItems">
     <accordion close-others=false>
     <accordion-group ng-repeat="li in lineItems" is-open="li.open">
     <accordion-heading>
