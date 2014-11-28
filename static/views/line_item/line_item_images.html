@@ -1,17 +1,16 @@
 <h4> Images </h4>
-<button type="button" class="btn btn-sm btn-primary" ng-click="addLineItemImage()">Add Image</button>
-<button type="button" class="btn btn-sm btn-warning" ng-click="deleteLineItemImage($index)">Delete Image</button>
-<br>
 <div style="height:70%; width:60%">
+  <button type="button" class="btn btn-sm btn-primary" ng-file-select="onFileSelect($files)">Add Image</button>
+  <br>
   <carousel interval="myInterval">
   <slide ng-repeat="slide in images" active="slide.active">
   <img ng-src="{{slide.url}}" ng-click="openLightboxModal($index)">
   <div class="carousel-caption">
-    <h4>Slide {{$index}}</h4>
-    <p>{{slide.text}}</p>
+    <p>{{slide.caption}}</p>
+    <p ng-click="deleteLineItemImage($index)">delete image</p>
   </div>
   </slide>
   </carousel>
+  <br>
 </div>
-<br><br>
 

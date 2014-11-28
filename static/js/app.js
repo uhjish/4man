@@ -1,5 +1,5 @@
 // Declare app level module which depends on filters, and services
-var app = angular.module('manpower', ['ngResource', 'ngRoute', 'restangular','ui.bootstrap', 'ui.date', 'ngCookies', 'xeditable', 'uuid4', 'ngScrollSpy', 'bootstrapLightbox'])
+var app = angular.module('manpower', ['ngResource', 'ngRoute', 'restangular','ui.bootstrap', 'ui.date', 'ngCookies', 'xeditable', 'uuid4', 'ngScrollSpy', 'bootstrapLightbox', 'angularFileUpload'])
   .config(function ($routeProvider, RestangularProvider) {
     $routeProvider
       .when('/app', {

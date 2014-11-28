@@ -14,6 +14,7 @@ from lib.models.project import *
 from lib.models.property import *
 from lib.models.note import *
 from lib.admin import AdminModelView, UserModelView, LogoutView, LoginView
+from lib.image import ImageS3
 from dummy_data import init_models
 import simplejson as json
 import os,sys
@@ -23,6 +24,12 @@ app = Flask(__name__, static_url_path='')
 app.config.from_object('config.DevelopmentConfig')
 
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
+
+s3secret = os.environ.get('S3_SECRET', '/vEEnDrqW122W2Srico4fWAtvbj1KOGsghgKOD6L')
+s3key = os.environ.get('S3_KEY', 'AKIAITUO7C4GJ6CRGEAQ')
+
+s3Gatekeeper = ImageS3(app.config['IMAGE_BUCKET'], s3key, s3secret) 
+#                        os.environ.get('S3_KEY'), os.environ.get('S3_SECRET') ) 
 
 # Setup Flask-Security  =======================================================
 security = Security(app, user_datastore)
@@ -53,7 +60,11 @@ def mypage():
 
 @app.route('/getS3prefix')
 def getS3prefix():
-    return app.config['IMAGE_BUCKET'];
+    return "https://s3.amazonaws.com/%s/project-images/" % app.config['IMAGE_BUCKET'];
+
+@app.route('/getS3access')
+def getS3access():
+    return json.dumps(s3Gatekeeper.generate_token())
 
 @app.route('/app')
 @login_required
@@ -113,6 +124,10 @@ apimanager.create_api(LineItem,
 #	preprocessors=dict(GET_SINGLE=[auth_func], GET_MANY=[auth_func]),
 )
 apimanager.create_api(LineSubitem,
+	methods=['GET', 'POST', 'DELETE', 'PUT'],
+#	preprocessors=dict(GET_SINGLE=[auth_func], GET_MANY=[auth_func]),
+)
+apimanager.create_api(SiteImage,
 	methods=['GET', 'POST', 'DELETE', 'PUT'],
 #	preprocessors=dict(GET_SINGLE=[auth_func], GET_MANY=[auth_func]),
 )
