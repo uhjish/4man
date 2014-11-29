@@ -19,7 +19,9 @@ angular.module('manpower').controller('LineItemImageController', function ($scop
 
   $scope.files ={};
   $scope.init = function(li_id){
-    Restangular.one('api/line_item', li_id).get()
+    $scope.images = [];
+    $scope.li_id = li_id;
+    Restangular.one('api/line_item', $scope.li_id).get()
     .then( function(li){
       $scope.currentLineItem = li;
       console.log("got li!");
@@ -63,6 +65,10 @@ angular.module('manpower').controller('LineItemImageController', function ($scop
     }, function(response) {
       console.log("Error with status code", response.status);
     });
+  }
+  
+  $scope.refreshImages = function(){
+    $scope.init($scope.currentLineItem.id);
   }
 
   $scope.openLightboxModal = function (index) {

@@ -1,7 +1,8 @@
 <h4> Images </h4>
 <div style="height:70%; width:60%">
   <button type="button" class="btn btn-sm btn-primary" ng-file-select="onFileSelect($files)">Add Image</button>
-  <br>
+  <button type="button" class="btn btn-sm btn-warning" ng-click="refreshImages()">Refresh</button>
+  <br><br>
   <carousel interval="myInterval">
   <slide ng-repeat="slide in images" active="slide.active">
   <img ng-src="{{slide.url}}" ng-click="openLightboxModal($index)">

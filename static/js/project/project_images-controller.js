@@ -4,6 +4,7 @@ angular.module('manpower').controller('ProjectImageController', function ($scope
 
   $scope.files ={};
   $scope.init = function(){
+    $scope.images = [];
     $scope.getCurrentProject()
     .then(function(currentProject){
       $scope.project_id = currentProject.id;
@@ -46,6 +47,22 @@ angular.module('manpower').controller('ProjectImageController', function ($scope
     img["caption"] = img.created_at.substring(0,10);
     $scope.images.push(img); 
   
+  }
+
+  $scope.refreshImages = function(){
+    $scope.init()
+  }
+
+  $scope.updateImageLineItem = function(idx, newLI){
+    var id = $scope.images[idx].image_uuid;
+    console.log("id: " + JSON.stringify($scope.images[idx]));
+    console.log("li: " + newLI);
+    Restangular.one('api/site_image', id).customPUT({"lineitem_id": newLI})
+    .then( function( newImg ) {
+      newImg["url"] = $scope.bucket + newImg.image_uuid;
+      newImg["caption"] = newImg.created_at.substring(0,10);
+      $scope.images[idx] = newImg;
+    });
   }
 
   $scope.deleteLineItemImage = function(idx){
