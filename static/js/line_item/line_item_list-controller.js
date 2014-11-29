@@ -11,6 +11,7 @@ angular.module('manpower').
 
       currentProject.getList('line_items')
       .then(function( lItems ){
+        lItems.sort( function(a,b){ return a.id - b.id; } );
         $scope.lineItems = lItems;
       });
 

@@ -9,6 +9,7 @@ angular.module('manpower').controller('ProjectImageController', function ($scope
     .then(function(currentProject){
       $scope.project_id = currentProject.id;
       $scope.lineitems = currentProject.line_items;
+      $scope.lineitems.sort(function(a,b){return a.id - b.id;});
       console.log(JSON.stringify(currentProject));
       $scope.getImages(currentProject);
     });
