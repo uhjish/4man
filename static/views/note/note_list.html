@@ -1,0 +1,12 @@
+
+<div class="panel panel-default" id="anchor4">
+  <div class="panel-heading" style="background-color:#ddd;">
+    <h4 >
+      <span class="title" style="background-color:#ddd;">Notes</span> 
+    </h4>
+  </div>
+  <div class="panel-body">
+    <alert ng-repeat="note in notes" close="deleteNote($index)">{{note.msg}}</alert>
+  </div>
+</div>
+
