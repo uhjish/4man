@@ -88,20 +88,6 @@
   </div>
   <div class="container" ng-controller="ProjectImageController" ng-init="init(currentProject)" ng-include="'views/project/project-images.html'">
   </div>
-  <div class="panel panel-default" id="anchor4">
-    <div class="panel-heading" style="background-color:#ddd;">
-      <div class="row clearfix">
-        <div class="col-md-8 col-sm-8 column">
-          <h4 >
-            <span class="title" style="background-color:#ddd;">Notes</span> 
-          </h4>
-        </div>
-        <div class="col-md-4 col-sm-4 column" align="right">
-          <button type="button" class="btn btn-primary">Add Note</button>
-        </div>
-      </div>
-    </div>
-    <div class="panel-body">
-    </div>
+  <div class="container" ng-controller="NoteController" ng-init="init(currentProject.notes)" ng-include="'views/note/note_list.html'">
   </div>
 </div>

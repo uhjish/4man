@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('manpower')
-  .controller('NoteController', ['$scope', '$modal', 'resolvedNote', 'Note',
+  .controller('NoteOldController', ['$scope', '$modal', 'resolvedNote', 'Note',
     function ($scope, $modal, resolvedNote, Note) {
 
       $scope.notes = resolvedNote;

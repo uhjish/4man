@@ -25,8 +25,8 @@ app.config.from_object('config.DevelopmentConfig')
 
 user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 
-s3secret = os.environ.get('S3_SECRET', '/vEEnDrqW122W2Srico4fWAtvbj1KOGsghgKOD6L')
-s3key = os.environ.get('S3_KEY', 'AKIAITUO7C4GJ6CRGEAQ')
+s3secret = os.environ.get('S3_SECRET')
+s3key = os.environ.get('S3_KEY')
 
 s3Gatekeeper = ImageS3(app.config['IMAGE_BUCKET'], s3key, s3secret) 
 #                        os.environ.get('S3_KEY'), os.environ.get('S3_SECRET') ) 
@@ -60,11 +60,18 @@ def mypage():
 
 @app.route('/getS3prefix')
 def getS3prefix():
+    print >>sys.stderr, current_user, current_user.id, current_user.roles
     return "https://s3.amazonaws.com/%s/project-images/" % app.config['IMAGE_BUCKET'];
 
 @app.route('/getS3access')
 def getS3access():
     return json.dumps(s3Gatekeeper.generate_token())
+@app.route('/getCurrentUser')
+def getCurrentUser():
+    return json.dumps({ "email": current_user.email,
+            "id": current_user.id,
+            "roles": map( lambda x: x.name, current_user.roles )
+            } )
 
 @app.route('/app')
 @login_required
